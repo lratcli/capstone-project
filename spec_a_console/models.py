@@ -26,7 +26,7 @@ class HypotheticalSystem(models.Model):
     # featured_image = CloudinaryField('image', default='placeholder')
 
     manufacturer = models.CharField(max_length=200)
-    release_year = release_year = models.IntegerField(
+    release_year = models.IntegerField(
         validators=[MinValueValidator(1970), MaxValueValidator(2025)],
         help_text="Enter the year the console was introduced"
     )
