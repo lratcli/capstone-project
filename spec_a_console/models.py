@@ -1,6 +1,6 @@
 from django.db import models  # type: ignore
 from django.contrib.auth.models import User  # type: ignore
-from cloudinary.models import CloudinaryField  # type: ignore
+# from cloudinary.models import CloudinaryField  # type: ignore
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 
@@ -23,7 +23,7 @@ class HypotheticalSystem(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
     created_by = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='hypothetical_systems')
-    featured_image = CloudinaryField('image', default='placeholder')
+    # featured_image = CloudinaryField('image', default='placeholder')
 
     manufacturer = models.CharField(max_length=200)
     release_year = release_year = models.IntegerField(
