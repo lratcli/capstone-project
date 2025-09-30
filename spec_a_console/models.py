@@ -1,6 +1,8 @@
-from django.db import models # type: ignore
+from django.db import models  # type: ignore
 from django.contrib.auth.models import User  # type: ignore
 from cloudinary.models import CloudinaryField  # type: ignore
+from django.core.validators import MinValueValidator, MaxValueValidator
+
 
 # Create your models here.
 
@@ -13,7 +15,7 @@ STATUS_CHOICES = (
 
 class HypotheticalSystem(models.Model):
     """
-    A model to represent a hypothetical gaming console created by 
+    A model to represent a hypothetical gaming console created by
         :model:`auth.User`.
     """
 
@@ -24,7 +26,10 @@ class HypotheticalSystem(models.Model):
     featured_image = CloudinaryField('image', default='placeholder')
 
     manufacturer = models.CharField(max_length=200)
-    release_date = models.DateField()
+    release_date = release_year = models.IntegerField(
+        validators=[MinValueValidator(1970), MaxValueValidator(2025)],
+        help_text="Enter the year the console was introduced"
+    )
     cpu = models.CharField(max_length=200)
     graphics = models.CharField(max_length=200)
     memory = models.CharField(max_length=200)
