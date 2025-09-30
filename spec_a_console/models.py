@@ -44,11 +44,11 @@ class HypotheticalSystem(models.Model):
 
     approval = models.IntegerField(choices=STATUS_CHOICES, default=0)
 
-    def __str__(self):
-        return self.name
-
     class Meta:
         ordering = ['-created_at']
+
+    def __str__(self):
+        return self.name
 
 
 class SystemReview(models.Model):
