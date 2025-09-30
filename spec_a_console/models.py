@@ -1,3 +1,46 @@
-from django.db import models
+from django.db import models # type: ignore
+from django.contrib.auth.models import User  # type: ignore
+from cloudinary.models import CloudinaryField  # type: ignore
 
 # Create your models here.
+
+
+STATUS_CHOICES = (
+    (0, 'Submitted'),
+    (1, 'Accepted'),
+)
+
+
+class HypotheticalSystem(models.Model):
+    """
+    A model to represent a hypothetical gaming console created by 
+        :model:`auth.User`.
+    """
+
+    name = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=200, unique=True)
+    created_by = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='hypothetical_systems')
+    featured_image = CloudinaryField('image', default='placeholder')
+
+    manufacturer = models.CharField(max_length=200)
+    release_date = models.DateField()
+    cpu = models.CharField(max_length=200)
+    graphics = models.CharField(max_length=200)
+    memory = models.CharField(max_length=200)
+    launch_rrp_unadjusted = models.DecimalField(
+        max_digits=10, decimal_places=2)
+
+    detailed_description = models.TextField()
+    brief_description = models.TextField(max_length=300)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    approval = models.IntegerField(choices=STATUS_CHOICES, default=0)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ['-created_on']
