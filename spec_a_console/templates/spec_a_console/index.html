@@ -7,6 +7,9 @@
         {% for system in hypothetical_systems %}
             <li>
                 <strong>{{ system.name }}</strong> - {{ system.manufacturer }} ({{ system.release_year }})
+                <a href="{% url 'system_detail' system.slug %}" class="post-link">
+                                <h2>Link</h2>
+                            </a>
             </li>
         {% empty %}
             <li>No systems found.</li>
