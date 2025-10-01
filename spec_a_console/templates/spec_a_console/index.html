@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hypothetical Systems</title>
+</head>
+<body>
+    <h1>Hypothetical Systems</h1>
+    <ul>
+        {% for system in hypothetical_systems %}
+            <li>
+                <strong>{{ system.name }}</strong> - {{ system.manufacturer }} ({{ system.release_year }})
+            </li>
+        {% empty %}
+            <li>No systems found.</li>
+        {% endfor %}
+    </ul>
+    {% if is_paginated %}
+        <div>
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+            {% endif %}
+            <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">Next</a>
+            {% endif %}
+        </div>
+    {% endif %}
+</body>
+</html>

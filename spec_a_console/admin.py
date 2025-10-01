@@ -2,8 +2,13 @@ from django.contrib import admin
 from .models import HypotheticalSystem, SystemReview
 from django_summernote.admin import SummernoteModelAdmin  # type: ignore
 
+
 @admin.register(HypotheticalSystem)
 class HypotheticalSystemAdmin(SummernoteModelAdmin):
+    """
+    Admin model for HypotheticalSystem, using Summernote for
+    detailed_description.
+    """
 
     list_display = (
         'name',
