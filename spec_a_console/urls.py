@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
     # path('', views.index, name='index'),
-    path('', views.HypotheticalSystemListView.as_view(), name='index'),
-    path('<slug:slug>/', views.hypothetical_system_detail_view, 
+    path('', views.ConsoleSystemListView.as_view(), name='index'),
+    path('<slug:slug>/', views.console_system_detailed_view,
          name='system_detail'),
 ]

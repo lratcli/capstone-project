@@ -13,7 +13,7 @@ STATUS_CHOICES = (
 )
 
 
-class HypotheticalSystem(models.Model):
+class ConsoleSystem(models.Model):
     """
     A model to represent a hypothetical gaming console created by
         :model:`auth.User`.
@@ -22,13 +22,13 @@ class HypotheticalSystem(models.Model):
     name = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
     created_by = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='hypothetical_systems')
+        User, on_delete=models.CASCADE, related_name='console_systems')
     featured_image = CloudinaryField('image', default='placeholder')
 
     manufacturer = models.CharField(max_length=200)
     release_year = models.IntegerField(
         validators=[MinValueValidator(1970), MaxValueValidator(2025)],
-        help_text="Enter the year the console was introduced"
+        help_text="Enter the year your hypothetical console was introduced"
     )
     cpu = models.CharField(max_length=200)
     graphics = models.CharField(max_length=200)
@@ -53,12 +53,12 @@ class HypotheticalSystem(models.Model):
 
 class SystemReview(models.Model):
     """
-    A model to represent user reviews for a HypotheticalSystem.
+    A model to represent user reviews for a ConsoleSystem.
     Related to :model:`auth.User` and
-    :model:`spec_a_console.HypotheticalSystem`
+    :model:`spec_a_console.ConsoleSystem`
     """
     system = models.ForeignKey(
-        HypotheticalSystem, on_delete=models.CASCADE, related_name='reviews'
+        ConsoleSystem, on_delete=models.CASCADE, related_name='reviews'
     )
     reviewer = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='system_reviewer')

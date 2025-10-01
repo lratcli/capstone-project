@@ -1,12 +1,12 @@
 from django.contrib import admin
-from .models import HypotheticalSystem, SystemReview
+from .models import ConsoleSystem, SystemReview
 from django_summernote.admin import SummernoteModelAdmin  # type: ignore
 
 
-@admin.register(HypotheticalSystem)
-class HypotheticalSystemAdmin(SummernoteModelAdmin):
+@admin.register(ConsoleSystem)
+class ConsoleSystemAdmin(SummernoteModelAdmin):
     """
-    Admin model for HypotheticalSystem, using Summernote for
+    Admin model for ConsoleSystem, using Summernote for
     detailed_description.
     """
 

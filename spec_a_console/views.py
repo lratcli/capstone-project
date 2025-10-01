@@ -3,7 +3,7 @@ from django.views import generic  # type: ignore
 
 from django.http import HttpResponse
 
-from .models import HypotheticalSystem, SystemReview
+from .models import ConsoleSystem, SystemReview
 
 
 # Create your views here.
@@ -11,19 +11,19 @@ def index(request):
     return HttpResponse("Hello, this is the spec_a_console index page.")
 
 
-class HypotheticalSystemListView(generic.ListView):
-    """A view to list all approved HypotheticalSystem instances."""
-    model = HypotheticalSystem
+class ConsoleSystemListView(generic.ListView):
+    """A view to list all approved ConsoleSystem instances."""
+    model = ConsoleSystem
     template_name = 'spec_a_console/index.html'
-    context_object_name = 'hypothetical_systems'
+    context_object_name = 'console_systems'
     paginate_by = 10
-    queryset = HypotheticalSystem.objects.filter(
+    queryset = ConsoleSystem.objects.filter(
         approval=1).order_by('-created_on')
 
 
-def hypothetical_system_detail_view(request, slug):
-    """A view to show details of a specific HypotheticalSystem."""
-    queryset = HypotheticalSystem.objects.filter(approval=1)
+def console_system_detailed_view(request, slug):
+    """A view to show details of a specific ConsoleSystem."""
+    queryset = ConsoleSystem.objects.filter(approval=1)
     system = get_object_or_404(queryset, slug=slug)
 
     # TODO: add reviews of the system here
