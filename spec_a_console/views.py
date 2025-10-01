@@ -21,7 +21,7 @@ class HypotheticalSystemListView(generic.ListView):
         approval=1).order_by('-created_on')
 
 
-def HypotheticalSystemDetailView(request, slug):
+def HypotheticalSystem_DetailView(request, slug):
     """A view to show details of a specific HypotheticalSystem."""
     queryset = HypotheticalSystem.objects.filter(approval=1)
     system = get_object_or_404(queryset, slug=slug)
