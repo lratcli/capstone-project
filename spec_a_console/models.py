@@ -39,13 +39,13 @@ class HypotheticalSystem(models.Model):
     detailed_description = models.TextField()
     brief_description = models.TextField(max_length=300)
 
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
 
     approval = models.IntegerField(choices=STATUS_CHOICES, default=0)
 
     class Meta:
-        ordering = ['-created_at']
+        ordering = ['-created_on']
 
     def __str__(self):
         return self.name
@@ -67,11 +67,11 @@ class SystemReview(models.Model):
         help_text="Rating from 1 (worst) to 10 (best)"
     )
     comment = models.TextField(blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_on = models.DateTimeField(auto_now_add=True)
     approved = models.BooleanField(default=False)
 
     class Meta:
-        ordering = ['-created_at']
+        ordering = ['-created_on']
         # (Below) Optional: one review per user per system
         # unique_together = ('system', 'reviewer')
 
