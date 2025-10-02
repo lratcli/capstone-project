@@ -13,7 +13,7 @@ STATUS_CHOICES = (
 )
 
 
-class HypotheticalSystem(models.Model):
+class ConsoleSystem(models.Model):
     """
     A model to represent a hypothetical gaming console created by
         :model:`auth.User`.
@@ -22,13 +22,13 @@ class HypotheticalSystem(models.Model):
     name = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
     created_by = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='hypothetical_systems')
+        User, on_delete=models.CASCADE, related_name='console_systems')
     featured_image = CloudinaryField('image', default='placeholder')
 
     manufacturer = models.CharField(max_length=200)
     release_year = models.IntegerField(
         validators=[MinValueValidator(1970), MaxValueValidator(2025)],
-        help_text="Enter the year the console was introduced"
+        help_text="Enter the year your hypothetical console was introduced"
     )
     cpu = models.CharField(max_length=200)
     graphics = models.CharField(max_length=200)
@@ -39,13 +39,13 @@ class HypotheticalSystem(models.Model):
     detailed_description = models.TextField()
     brief_description = models.TextField(max_length=300)
 
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
 
     approval = models.IntegerField(choices=STATUS_CHOICES, default=0)
 
     class Meta:
-        ordering = ['-created_at']
+        ordering = ['-created_on']
 
     def __str__(self):
         return self.name
@@ -53,12 +53,12 @@ class HypotheticalSystem(models.Model):
 
 class SystemReview(models.Model):
     """
-    A model to represent user reviews for a HypotheticalSystem.
+    A model to represent user reviews for a ConsoleSystem.
     Related to :model:`auth.User` and
-    :model:`spec_a_console.HypotheticalSystem`
+    :model:`spec_a_console.ConsoleSystem`
     """
     system = models.ForeignKey(
-        HypotheticalSystem, on_delete=models.CASCADE, related_name='reviews'
+        ConsoleSystem, on_delete=models.CASCADE, related_name='reviews'
     )
     reviewer = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='system_reviewer')
@@ -67,11 +67,11 @@ class SystemReview(models.Model):
         help_text="Rating from 1 (worst) to 10 (best)"
     )
     comment = models.TextField(blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_on = models.DateTimeField(auto_now_add=True)
     approved = models.BooleanField(default=False)
 
     class Meta:
-        ordering = ['-created_at']
+        ordering = ['-created_on']
         # (Below) Optional: one review per user per system
         # unique_together = ('system', 'reviewer')
 

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}{{ system.name }} Details{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+    <div class="row">
+        <div class="col-12 col-md-8 mx-auto">
+            <h1 class="mb-3">{{ system.name }}</h1>
+            <div class="card mb-4 shadow-sm">
+                {% if system.featured_image %}
+                    <img src="{{ system.featured_image.url }}" class="card-img-top img-fluid" alt="Image of {{ system.name }}">
+                {% endif %}
+                <div class="card-body">
+                    <h2 class="h5">Manufacturer: <span class="fw-normal">{{ system.manufacturer }}</span></h2>
+                    <p><strong>Release Year:</strong> {{ system.release_year }}</p>
+                    <p><strong>CPU:</strong> {{ system.cpu }}</p>
+                    <p><strong>Graphics:</strong> {{ system.graphics }}</p>
+                    <p><strong>Memory:</strong> {{ system.memory }}</p>
+                    <p><strong>Launch RRP (Unadjusted):</strong> ${{ system.launch_rrp_unadjusted }}</p>
+                    <p><strong>Brief Description:</strong> {{ system.brief_description }}</p>
+                    <hr>
+                    <h3 class="h6">Detailed Description</h3>
+                    <p>{{ system.detailed_description }}</p>
+                    <p class="text-muted small">Created by: {{ system.created_by.username }} on {{ system.created_on|date:"F j, Y" }}</p>
+                    <p class="text-muted small">Last updated: {{ system.updated_on|date:"F j, Y" }}</p>
+                </div>
+            </div>
+            <a href="{% url 'index' %}" class="btn btn-primary" aria-label="Back to list">Back to List</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

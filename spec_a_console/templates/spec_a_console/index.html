@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>Hypothetical Systems</h1>
+    <ul>
+        {% for system in console_systems %}
+            <li>
+                <strong>{{ system.name }}</strong> - {{ system.manufacturer }} ({{ system.release_year }})
+                <a href="{% url 'system_detail' system.slug %}" class="post-link">
+                                <h2>Link</h2>
+                            </a>
+            </li>
+        {% empty %}
+            <li>No systems found.</li>
+        {% endfor %}
+    </ul>
+    {% if is_paginated %}
+        <div>
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+            {% endif %}
+            <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">Next</a>
+            {% endif %}
+        </div>
+    {% endif %}
+
+{% endblock %}
