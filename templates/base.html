@@ -16,6 +16,11 @@
 </head>
 
 <body>
+    {% if debug %}
+    <!-- DEBUG MODE ENABLED -->
+    <meta name="debug" content="true">
+    {% endif %}
+
     <!-- Header and Navbar -->
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary" aria-label="Main navigation">
