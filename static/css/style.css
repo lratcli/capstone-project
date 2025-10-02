@@ -1,0 +1,13 @@
+.bg-main-image {
+    background-image: url('/static/images/bg-image.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* background-color: rgba(0, 0, 0, 0.5); Black overlay, 50% opacity */
+    min-height: 300px; /* Adjust as needed */
+    width: 100%;
+    color: white; /* Optional: for text contrast */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

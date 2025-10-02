@@ -40,12 +40,14 @@
         </nav>
     </header>
 
-    <!-- Main Content -->
-    <main class="container my-4" id="main-content" tabindex="0">
-        {% block content %}
-        <!-- Page-specific content goes here -->
-        {% endblock %}
-    </main>
+    <div class="bg-main-image">
+        <!-- Main Content -->
+        <main class="container my-4" id="main-content" tabindex="0">
+            {% block content %}
+            <!-- Page-specific content goes here -->
+            {% endblock %}
+        </main>
+    </div>
 
     <!-- Footer -->
     <footer class="bg-light text-center text-lg-start mt-auto">
