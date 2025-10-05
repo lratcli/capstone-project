@@ -5,10 +5,12 @@ from django.http import HttpResponse
 
 from .models import ConsoleSystem, SystemReview
 
+from .forms import SystemReviewForm
+
 
 # Create your views here.
-def index(request):
-    return HttpResponse("Hello, this is the spec_a_console index page.")
+# def index(request):
+#     return HttpResponse("Hello, this is the spec_a_console index page.")
 
 
 class ConsoleSystemListView(generic.ListView):
@@ -29,10 +31,14 @@ def console_system_detailed_view(request, slug):
     # TODO: add reviews of the system here
     # reviews = system.reviews.all().order_by('-created_on')
 
+    # Create a new form, so user can add another comment if they wish
+    review_form = SystemReviewForm()
+
     return render(
         request,
         'spec_a_console/system_detail.html',
         {
             'system': system,
             # 'reviews': reviews,
+            'review_form': review_form,
         })

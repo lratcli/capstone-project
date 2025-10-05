@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
 
 {% block title %}{{ system.name }} Details{% endblock %}
 
@@ -29,5 +31,22 @@
             <a href="{% url 'index' %}" class="btn btn-primary" aria-label="Back to list">Back to List</a>
         </div>
     </div>
+
+    <!-- Creating New System reviews -->
+        <div class="col-md-4 card mb-4 mt-3">
+            <div class="card-body">
+                {% if user.is_authenticated %}
+                <h3>Leave a review:</h3>
+                <p>You are logged in as: {{ user.username }}</p>
+                <form id="reviewForm" method="post" style="margin-top: 1.3em;">
+                    {{ review_form | crispy }}
+                    {% csrf_token %}
+                    <button id="submitButton" type="submit" class="btn btn-signup btn-lg">Submit</button>
+                </form>
+                {% else %}
+                <p>Log in to add a review for this fantasy system!</p>
+                {% endif %}
+            </div>
+        </div>
 </div>
 {% endblock %}
