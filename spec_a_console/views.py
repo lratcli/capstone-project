@@ -42,21 +42,29 @@ def console_system_detailed_view(request, slug):
     reviews = system.reviews.filter().order_by('-created_on')
     review_count = system.reviews.filter(approved=True).count()
 
-    if request.method == "POST":
-        review_form = SystemReviewForm(data=request.POST)
-        if review_form.is_valid():
-            review = review_form.save(commit=False)  # get form ref w/out sav
-            review.reviewer = request.user  # finsih populating form
-            review.system = system  # get ref to post comment is being put on
-            review.save()  # now time to save
-            # Below: send message to user confirming submission
-            messages.add_message(request, messages.SUCCESS,
-                                 'Review submitted and awaiting approval')
-            # Redirect to the same page to prevent resubmission
-            return redirect('system_detail', slug=system.slug)
-
-    # Create a new form, so user can add another review if they wish
     review_form = SystemReviewForm()
+    user_has_reviewed = False
+
+    if request.user.is_authenticated:
+        user_has_reviewed = system.reviews.filter(reviewer=request.user).exists()
+
+        if request.method == "POST":
+            if user_has_reviewed:
+                messages.error(request, "You have already submitted a review for this system.")
+            else:
+                review_form = SystemReviewForm(data=request.POST)
+                if review_form.is_valid():
+                    review = review_form.save(commit=False)  # get form ref w/out sav
+                    review.reviewer = request.user  # finsih populating form
+                    review.system = system  # get ref to post comment is being put on
+                    review.save()  # now time to save
+                    # Below: send message to user confirming submission
+                    messages.add_message(request, messages.SUCCESS,
+                                         'Review submitted and awaiting approval')
+                    # Redirect to the same page to prevent resubmission
+                    return redirect('system_detail', slug=system.slug)
+    elif request.method == "POST":
+        messages.error(request, "You must be logged in to leave a review.")
 
     return render(
         request,
@@ -66,6 +74,7 @@ def console_system_detailed_view(request, slug):
             'review_form': review_form,
             'review_count': review_count,
             'reviews': reviews,
+            'user_has_reviewed': user_has_reviewed,
         })
 
 
