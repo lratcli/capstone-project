@@ -13,3 +13,7 @@
     /* background-blend-mode makes the color blend with the image */
     background-blend-mode: darken;
 }
+
+.awaiting-approval {
+    color: red;
+}

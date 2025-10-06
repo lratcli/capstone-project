@@ -104,6 +104,24 @@ def create_console_system_view(request):
 
 
 @login_required
+def edit_console_system_view(request, slug):
+    """A view to edit an existing ConsoleSystem."""
+    from .forms import ConsoleSystemForm  # Import here to avoid circular import
+    system = get_object_or_404(ConsoleSystem, slug=slug)
+    if request.user != system.created_by:
+        raise Http404("You do not have permission to edit this system.")
+    if request.method == "POST":
+        form = ConsoleSystemForm(request.POST, request.FILES, instance=system)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "System updated successfully.")
+            return redirect('system_detail', slug=system.slug)
+    else:
+        form = ConsoleSystemForm(instance=system)
+    return render(request, 'spec_a_console/edit_system.html', {'form': form, 'system': system})
+
+
+@login_required
 def delete_console_system_view(request, slug):
     system = get_object_or_404(ConsoleSystem, slug=slug)
     if request.user != system.created_by:

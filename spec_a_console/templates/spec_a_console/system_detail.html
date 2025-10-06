@@ -16,6 +16,10 @@
                 <img src="/static/images/placeholder.jpg" alt="Placeholder image">
                 {% endif %}
                 <div class="card-body">
+                    {% if system.approval != 1%}
+                    <p class="awaiting-approval"><strong>This system is currently awaiting approval, and is currently only visible
+                        by you</strong></p>
+                    {% endif %}
                     <h2 class="h5">Manufacturer: <span class="fw-normal">{{ system.manufacturer }}</span></h2>
                     <p><strong>Release Year:</strong> {{ system.release_year }}</p>
                     <p><strong>CPU:</strong> {{ system.cpu }}</p>
@@ -36,7 +40,7 @@
                 <!-- Delete Button -->
                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteSystemModal">
                     Delete System </button>
-                    
+                <a href="{% url 'edit_system' system.slug %}" class="btn btn-warning">Edit System</a>
                 {% endif %}
             </div>
 
