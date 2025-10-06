@@ -29,17 +29,17 @@
                     <p><strong>Brief Description:</strong> {{ system.brief_description }}</p>
                     <hr>
                     <h3 class="h6">Detailed Description</h3>
-                    <p>{{ system.detailed_description }}</p>
+                    {{ system.detailed_description }}
                     <p class="text-muted small">Created by: {{ system.created_by.username }} on {{ system.created_on|date:"F j, Y" }}</p>
                     <p class="text-muted small">Last updated: {{ system.updated_on|date:"F j, Y" }}</p>
                 </div>
             </div>
             <div>
                 {% if user.is_authenticated and system.created_by == user %}
-                <p>DEBUG: You should see buttons below</p>
                 <!-- Delete Button -->
                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteSystemModal">
                     Delete System </button>
+                <!-- Edit button -->
                 <a href="{% url 'edit_system' system.slug %}" class="btn btn-warning">Edit System</a>
                 {% endif %}
             </div>
@@ -52,7 +52,9 @@
         <div class="col-md-4 card mb-4 mt-3">
             <div class="card-body">
                 {% if user.is_authenticated %}
-                    {% if user_has_reviewed %}
+                    {% if user_is_creator %}
+                        <p class="text-warning">You cannot review your own system.</p>
+                    {% elif user_has_reviewed %}
                         <p class="text-warning">You have already submitted a review for this system.</p>
                     {% else %}    
                         <h3>Leave a review:</h3>

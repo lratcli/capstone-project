@@ -44,8 +44,9 @@ def console_system_detailed_view(request, slug):
 
     review_form = SystemReviewForm()
     user_has_reviewed = False
+    user_is_creator = request.user.is_authenticated and request.user == system.created_by
 
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and not user_is_creator:
         user_has_reviewed = system.reviews.filter(reviewer=request.user).exists()
 
         if request.method == "POST":
@@ -75,6 +76,7 @@ def console_system_detailed_view(request, slug):
             'review_count': review_count,
             'reviews': reviews,
             'user_has_reviewed': user_has_reviewed,
+            'user_is_creator': user_is_creator,
         })
 
 
