@@ -1,7 +1,9 @@
 from django.shortcuts import redirect, render, get_object_or_404, reverse  # noqa: F401, E501, # type: ignore
+from django.contrib.auth.decorators import login_required
 from django.views import generic  # type: ignore
 from django.utils.text import slugify
 # from django.http import HttpResponse
+from django.http import Http404
 from django.contrib import messages  # type: ignore
 from .models import ConsoleSystem
 from .forms import SystemReviewForm
@@ -24,8 +26,17 @@ class ConsoleSystemListView(generic.ListView):
 
 def console_system_detailed_view(request, slug):
     """A view to show details of a specific ConsoleSystem."""
-    queryset = ConsoleSystem.objects.filter(approval=1)
-    system = get_object_or_404(queryset, slug=slug)
+    # queryset = ConsoleSystem.objects.filter(approval=1)
+    # system = get_object_or_404(queryset, slug=slug)
+
+    system = get_object_or_404(ConsoleSystem, slug=slug)
+
+    # Only show unapproved systems to their creator
+    if system.approval != 1 and system.created_by != request.user:
+        raise Http404("No ConsoleSystem matches the given query.")
+
+    if system.approval != 1 and system.created_by == request.user:
+        messages.info(request, "This system is awaiting approval.")
 
     # TODO: add reviews of the system here
     reviews = system.reviews.filter().order_by('-created_on')
@@ -58,6 +69,19 @@ def console_system_detailed_view(request, slug):
         })
 
 
+def my_console_systems_view(request):
+    """A view to list all ConsoleSystem instances created by the logged-in user."""
+    user_systems = ConsoleSystem.objects.filter(
+        created_by=request.user).order_by('-created_on')
+
+    return render(
+        request,
+        'spec_a_console/my_systems.html',
+        {
+            'user_systems': user_systems,
+        })
+
+
 def create_console_system_view(request):
     """A view to create a new ConsoleSystem."""
     from .forms import ConsoleSystemForm  # Import here to avoid circular import
@@ -79,14 +103,14 @@ def create_console_system_view(request):
     return render(request, 'spec_a_console/create_system.html', {'create_form': form})
 
 
-def my_console_systems_view(request):
-    """A view to list all ConsoleSystem instances created by the logged-in user."""
-    user_systems = ConsoleSystem.objects.filter(
-        created_by=request.user).order_by('-created_on')
-
-    return render(
-        request,
-        'spec_a_console/my_systems.html',
-        {
-            'user_systems': user_systems,
-        })
+@login_required
+def delete_console_system_view(request, slug):
+    system = get_object_or_404(ConsoleSystem, slug=slug)
+    if request.user != system.created_by:
+        messages.error(request, "You do not have permission to delete this system.")
+        return redirect('system_detail', slug=slug)
+    if request.method == "POST":
+        system.delete()
+        messages.success(request, "System deleted successfully.")
+        return redirect('index')
+    return redirect('system_detail', slug=slug)

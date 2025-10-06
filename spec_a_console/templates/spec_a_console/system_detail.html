@@ -12,6 +12,8 @@
             <div class="card mb-4 shadow-sm">
                 {% if system.featured_image %}
                     <img src="{{ system.featured_image.url }}" class="card-img-top img-fluid" alt="Image of {{ system.name }}">
+                {% else %}
+                <img src="/static/images/placeholder.jpg" alt="Placeholder image">
                 {% endif %}
                 <div class="card-body">
                     <h2 class="h5">Manufacturer: <span class="fw-normal">{{ system.manufacturer }}</span></h2>
@@ -28,6 +30,16 @@
                     <p class="text-muted small">Last updated: {{ system.updated_on|date:"F j, Y" }}</p>
                 </div>
             </div>
+            <div>
+                {% if user.is_authenticated and system.created_by == user %}
+                <p>DEBUG: You should see buttons below</p>
+                <!-- Delete Button -->
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteSystemModal">
+                    Delete System </button>
+                    
+                {% endif %}
+            </div>
+
             <a href="{% url 'index' %}" class="btn btn-primary" aria-label="Back to list">Back to List</a>
         </div>
     </div>
@@ -88,10 +100,10 @@
                     </p>
                     {% endif %}
 
-                    {% if user.is_authenticated and review.reviewer == user %}
+                    <!-- {% if user.is_authenticated and review.reviewer == user %}
                     <button class="btn btn-delete" data-review_id="{{ review.id }}">Delete</button>
                     <button class="btn btn-edit" data-review_id="{{ review.id }}">Edit</button>
-                    {% endif %}
+                    {% endif %} -->
 
                 </div>
                 <!-- Our for loop ends here -->
@@ -99,5 +111,27 @@
             </div>
         </div>
     </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteSystemModal" tabindex="-1" aria-labelledby="deleteSystemModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title" id="deleteSystemModalLabel">Confirm Delete</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete <strong>{{ system.name }}</strong>? This action cannot be undone.</p>
+      </div>
+      <div class="modal-footer">
+        <form method="post" action="{% url 'delete_system' system.slug %}">
+            {% csrf_token %}
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}
