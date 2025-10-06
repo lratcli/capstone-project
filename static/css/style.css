@@ -1,3 +1,55 @@
+/* Google Fonts */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+
+/* CSS Variables */
+:root {
+    --primary-font: "Orbitron", sans-serif;
+    --secondary-font: "Quantico", cursive;
+
+    /* CSS HEX */
+    --primary-color: #2100a5; /* dark blue */
+    --secondary-color: #a5c6e7; /* light blue */
+    --highlight-color: #006300; /* dark green */
+    --light-highlight: #abe781; /* light green */
+}
+
+
+/* Global styles */
+
+a,
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: var(--primary-font);
+}
+
+h2 {
+    padding-bottom: 1rem;
+}
+
+h4 {
+    padding-bottom: 0.75rem;
+}
+
+p {
+    font-family: var(--secondary-font);
+}
+
+.section {
+    padding: 1rem 40px 40px 40px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+
+    scroll-margin-top: 3rem;
+}
+
+
 .bg-main-image {
     background-image: url('/static/images/bg-image.webp');
     background-size: cover;
@@ -12,6 +64,15 @@
     justify-content: center;
     /* background-blend-mode makes the color blend with the image */
     background-blend-mode: darken;
+}
+
+
+.my-bg-primary {
+    background-color: var(--primary-color)
+}
+
+.my-bg-secondary {
+    background-color: var(--secondary-color);
 }
 
 .awaiting-approval {

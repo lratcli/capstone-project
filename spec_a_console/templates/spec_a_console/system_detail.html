@@ -13,7 +13,7 @@
                 {% if "placeholder" in system.featured_image.url %}
                 <img src="{% static 'images/placeholder-image.webp' %}" class="scale" alt="placeholder image">
                 {% else %}
-                <img src="{{ system.featured_image.url }}" class="scale" alt="{{ post.title }}">
+                <img src="{{ system.featured_image.url }}" class="scale" alt="{{ system.name }}>
                 {% endif %}
                 <div class="card-body">
                     {% if system.approval != 1%}

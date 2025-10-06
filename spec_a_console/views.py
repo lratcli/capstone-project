@@ -19,7 +19,7 @@ class ConsoleSystemListView(generic.ListView):
     model = ConsoleSystem
     template_name = 'spec_a_console/index.html'
     context_object_name = 'console_systems'
-    paginate_by = 10
+    paginate_by = 9
     queryset = ConsoleSystem.objects.filter(
         approval=1).order_by('-created_on')
 
@@ -124,7 +124,9 @@ def edit_console_system_view(request, slug):
     if request.method == "POST":
         form = ConsoleSystemForm(request.POST, request.FILES, instance=system)
         if form.is_valid():
-            form.save()
+            edited_system = form.save(commit=False)
+            edited_system.approval = 0  # Set back to "submitted / unapproved"
+            edited_system.save()
             messages.success(request, "System updated successfully.")
             return redirect('system_detail', slug=system.slug)
     else:
