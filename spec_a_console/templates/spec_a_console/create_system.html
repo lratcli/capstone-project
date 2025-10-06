@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<p>Create your system!</p>
+
+<form id="createForm" method="post">
+    {{ create_form | crispy }}
+    {% csrf_token %}
+    <button id="submitButton" type="submit" class="btn btn-signup btn-lg">Submit</button>
+</form>
+
+{% else %}
+    <p>You must be logged in to create a system!</p>
+{% endif %}
+
+{% endblock %}

@@ -2,7 +2,7 @@
 {% load static %}
 
 {% url 'home' as home_url %}
-<!-- {% url 'about' as about_url %} -->
+{% url 'create_system' as create_url %}
 {% url 'account_login' as login_url %}
 {% url 'account_signup' as signup_url %}
 {% url 'account_logout' as logout_url %}
@@ -41,6 +41,10 @@
                             <a class="nav-link" href="#contact">Contact</a>
                         </li>
                         {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.path == create_url %}active" aria-current="page{% endif %}"
+                                href="{% url 'create_system' %}">Create System</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link {% if request.path == logout_url %}active" aria-current="page{% endif %}"
                                 href="{% url 'account_logout' %}">Logout</a>

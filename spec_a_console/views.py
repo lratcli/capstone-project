@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render, get_object_or_404, reverse  # noqa: F401, E501, # type: ignore
 from django.views import generic  # type: ignore
+from django.utils.text import slugify
 # from django.http import HttpResponse
 from django.contrib import messages  # type: ignore
 from .models import ConsoleSystem
@@ -55,3 +56,24 @@ def console_system_detailed_view(request, slug):
             'review_count': review_count,
             'reviews': reviews,
         })
+
+
+def create_console_system_view(request):
+    """A view to create a new ConsoleSystem."""
+    from .forms import ConsoleSystemForm  # Import here to avoid circular import
+
+    if request.method == 'POST':
+        form = ConsoleSystemForm(request.POST, request.FILES)
+        if form.is_valid():
+            console_system = form.save(commit=False)
+            console_system.slug = slugify(console_system.name)
+            console_system.created_by = request.user
+            console_system.save()
+            messages.success(request, 'Console system created successfully!')
+            return redirect('system_detail', slug=console_system.slug)
+        else:
+            messages.error(request, 'Please correct the errors below.')
+    else:
+        form = ConsoleSystemForm()
+
+    return render(request, 'spec_a_console/create_system.html', {'create_form': form})
