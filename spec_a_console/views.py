@@ -1,10 +1,8 @@
-from django.shortcuts import render, get_object_or_404, reverse  # noqa: F401, E501, # type: ignore
+from django.shortcuts import redirect, render, get_object_or_404, reverse  # noqa: F401, E501, # type: ignore
 from django.views import generic  # type: ignore
-
-from django.http import HttpResponse
-
-from .models import ConsoleSystem, SystemReview
-
+# from django.http import HttpResponse
+from django.contrib import messages  # type: ignore
+from .models import ConsoleSystem
 from .forms import SystemReviewForm
 
 
@@ -29,9 +27,23 @@ def console_system_detailed_view(request, slug):
     system = get_object_or_404(queryset, slug=slug)
 
     # TODO: add reviews of the system here
-    # reviews = system.reviews.all().order_by('-created_on')
+    reviews = system.reviews.filter().order_by('-created_on')
+    review_count = system.reviews.filter(approved=True).count()
 
-    # Create a new form, so user can add another comment if they wish
+    if request.method == "POST":
+        review_form = SystemReviewForm(data=request.POST)
+        if review_form.is_valid():
+            review = review_form.save(commit=False)  # get form ref w/out sav
+            review.reviewer = request.user  # finsih populating form
+            review.system = system  # get ref to post comment is being put on
+            review.save()  # now time to save
+            # Below: send message to user confirming submission
+            messages.add_message(request, messages.SUCCESS,
+                                 'Review submitted and awaiting approval')
+            # Redirect to the same page to prevent resubmission
+            return redirect('system_detail', slug=system.slug)
+
+    # Create a new form, so user can add another review if they wish
     review_form = SystemReviewForm()
 
     return render(
@@ -39,6 +51,7 @@ def console_system_detailed_view(request, slug):
         'spec_a_console/system_detail.html',
         {
             'system': system,
-            # 'reviews': reviews,
             'review_form': review_form,
+            'review_count': review_count,
+            'reviews': reviews,
         })

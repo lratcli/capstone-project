@@ -48,5 +48,53 @@
                 {% endif %}
             </div>
         </div>
+
+        <!-- Displaying count of user reviews -->
+    <div class="row">
+        <div class="col-12">
+            <strong class="text-secondary">
+                <i class="far fa-comments"></i> {{ review_count }}
+            </strong>
+        </div>
+        <div class="col-12">
+            <hr>
+        </div>
+    </div>
+    <!-- Displaying Reviews -->
+    <div class="row">
+        <div class="col-md-8 card mb-4  mt-3 ">
+            <h3>Reviews:</h3>
+            <div class="card-body">
+                <!-- Loop to display any number of reviews -->
+                {% for review in reviews %}
+                <div class="p-2 reviews
+                    {% if not review.approved and review.reviewer == user %}
+                    faded{% elif not review.approved %} d-none{% endif %}">
+                    <p class="font-weight-bold">
+                        {{ review.reviewer }}
+                        <span class="font-weight-normal">
+                            {{ review.created_on }}
+                        </span> wrote:
+                    </p>
+                    <div id="review{{ review.id }}">
+                        {{ review.comment | linebreaks }}
+                    </div>
+                    {% if not review.approved and review.reviewer == user %}
+                    <p class="approval">
+                        This review is awaiting approval
+                    </p>
+                    {% endif %}
+
+                    <!-- {% if user.is_authenticated and review.author == user %}
+                    <button class="btn btn-delete" data-review_id="{{ review.id }}">Delete</button>
+                    <button class="btn btn-edit" data-review_id="{{ review.id }}">Edit</button>
+                    {% endif %} -->
+
+                </div>
+                <!-- Our for loop ends here -->
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
