@@ -18,9 +18,9 @@
             <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
                 <div class="card h-100">
                     {% if "placeholder" in system.featured_image.url %}
-                    <img src="{% static 'images/placeholder-image.webp' %}" class="card-img-top" alt="placeholder image">
+                    <img src="{% static 'images/placeholder-image.webp' %}" class="card-img-top card-img-fixed" alt="placeholder image">
                     {% else %}
-                    <img src="{{ system.featured_image.url }}" class="card-img-top" alt="{{ system.name }}">
+                    <img src="{{ system.featured_image.url }}" class="card-img-top card-img-fixed" alt="{{ system.name }}">
                     {% endif %}
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">{{ system.name }}</h5>
