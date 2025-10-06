@@ -3,12 +3,12 @@
 
 {% block content %}
 
-    <h1>Hypothetical Systems</h1>
+    <h1>Your created fantasy gaming systems</h1>
     <ul>
-        {% for system in console_systems %}
+        {% for system in user_systems %}
             <li>
                 <strong>{{ system.name }}</strong> - {{ system.manufacturer }} ({{ system.release_year }})
-                <a href="{% url 'system_detail' system.slug %}" class="system-link">
+                <a href="{% url 'system_detail' system.slug %}" class="sysem-link">
                                 <h2>Link</h2>
                             </a>
             </li>
@@ -27,5 +27,6 @@
             {% endif %}
         </div>
     {% endif %}
+
 
 {% endblock %}

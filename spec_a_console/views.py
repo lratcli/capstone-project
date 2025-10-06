@@ -77,3 +77,16 @@ def create_console_system_view(request):
         form = ConsoleSystemForm()
 
     return render(request, 'spec_a_console/create_system.html', {'create_form': form})
+
+
+def my_console_systems_view(request):
+    """A view to list all ConsoleSystem instances created by the logged-in user."""
+    user_systems = ConsoleSystem.objects.filter(
+        created_by=request.user).order_by('-created_on')
+
+    return render(
+        request,
+        'spec_a_console/my_systems.html',
+        {
+            'user_systems': user_systems,
+        })
