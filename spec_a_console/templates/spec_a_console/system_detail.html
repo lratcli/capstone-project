@@ -10,10 +10,10 @@
         <div class="col-12 col-md-8 mx-auto">
             <h1 class="mb-3">{{ system.name }}</h1>
             <div class="card mb-4 shadow-sm">
-                {% if system.featured_image %}
-                    <img src="{{ system.featured_image.url }}" class="card-img-top img-fluid" alt="Image of {{ system.name }}">
+                {% if "placeholder" in system.featured_image.url %}
+                <img src="{% static 'images/placeholder-image.webp' %}" class="scale" alt="placeholder image">
                 {% else %}
-                <img src="/static/images/placeholder.jpg" alt="Placeholder image">
+                <img src="{{ system.featured_image.url }}" class="scale" alt="{{ post.title }}">
                 {% endif %}
                 <div class="card-body">
                     {% if system.approval != 1%}
