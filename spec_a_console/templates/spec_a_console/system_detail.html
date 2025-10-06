@@ -79,6 +79,9 @@
                     <div id="review{{ review.id }}">
                         {{ review.comment | linebreaks }}
                     </div>
+                    <div>
+                        Score: {{ review.rating }}
+                    </div>
                     {% if not review.approved and review.reviewer == user %}
                     <p class="approval">
                         This review is awaiting approval
