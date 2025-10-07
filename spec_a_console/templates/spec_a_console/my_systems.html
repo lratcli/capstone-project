@@ -3,7 +3,71 @@
 
 {% block content %}
 
-    <h1>Your created fantasy gaming systems</h1>
+
+<div class="container my-4">
+    <!-- Header and brief description -->
+    <div class="row mb-4">
+        <div class="col-12 text-center">
+            <h2 class="display-6">Your fantasy systems:</h2>
+            <p class="lead">These are the systems that you have added so far! 
+                (This includes systems that are visible only to yourself as they are 
+            <span class="awaiting-approval">awaiting approval</span>)</p>
+        </div>
+    </div>
+
+    <!-- Responsive grid of system cards -->
+    <div class="row g-4">
+        {% for system in user_systems %}
+            <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+                <div class="card h-100">
+                    {% if "placeholder" in system.featured_image.url %}
+                    <img src="{% static 'images/placeholder-image.webp' %}" class="card-img-top card-img-fixed" alt="placeholder image">
+                    {% else %}
+                    <img src="{{ system.featured_image.url }}" class="card-img-top card-img-fixed" alt="{{ system.name }}">
+                    {% endif %}
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ system.name }}</h5>
+                        {% if system.approval != 1 %}
+                        <p class="awaiting-approval">Awaiting approval</p>
+                        {% endif %}
+                        <p class="card-text">{{ system.brief_description|truncatewords:20 }}</p>
+                        <p class="card-text text-muted small mb-2">
+                            {{ system.manufacturer }} &middot; {{ system.release_year }}
+                        </p>
+                        <a href="{% url 'system_detail' system.slug %}" class="btn btn-primary mt-auto">View Details</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12">
+                <p class="text-center">No systems found.</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    {% if is_paginated %}
+        <nav aria-label="Page navigation" class="mt-4">
+            <ul class="pagination justify-content-center">
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                    </li>
+                {% endif %}
+                <li class="page-item disabled">
+                    <span class="page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+                </li>
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
+</div>
+
+    <!-- <h1>Your created fantasy gaming systems</h1>
     <ul>
         {% for system in user_systems %}
             <li>
@@ -26,7 +90,7 @@
                 <a href="?page={{ page_obj.next_page_number }}">Next</a>
             {% endif %}
         </div>
-    {% endif %}
+    {% endif %} -->
 
 
 {% endblock %}
