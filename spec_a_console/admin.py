@@ -30,6 +30,19 @@ class ConsoleSystemAdmin(SummernoteModelAdmin):
     summernote_fields = ('detailed_description',)
 
 
-# Register your models here.
+@admin.register(SystemReview)
+class SystemReviewAdmin(admin.ModelAdmin):
+    """
+    Admin model for SystemReview.
+    """
 
-admin.site.register(SystemReview)
+    list_display = (
+        'system',
+        'reviewer',
+        'rating',
+        'comment',
+        'created_on',
+        'approved',
+    )
+    list_filter = ('approved', 'created_on')
+    search_fields = ('system__name', 'reviewer__username', 'comment')
