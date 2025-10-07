@@ -38,7 +38,7 @@ def console_system_detailed_view(request, slug):
     if system.approval != 1 and system.created_by == request.user:
         messages.info(request, "This system is awaiting approval.")
 
-    # TODO: add reviews of the system here
+    # addreviews of the system here
     reviews = system.reviews.filter().order_by('-created_on')
     review_count = system.reviews.filter(approved=True).count()
 
