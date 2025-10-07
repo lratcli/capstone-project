@@ -49,8 +49,8 @@
                                 href="{% url 'create_system' %}">Create System</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {% if request.path == my_systems_url %}active" aria-current="page{% endif %}"
-                                href="{% url 'my_systems' %}">My Systems</a>
+                            <a class="nav-link {% if request.path == my_systems_url %}active"
+                                aria-current="page{% endif %}" href="{% url 'my_systems' %}">My Systems</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {% if request.path == logout_url %}active" aria-current="page{% endif %}"
@@ -75,20 +75,30 @@
     <div class="container-fluid px-0">
         <div class="row my-0">
             <div class="col-12">
-                <div class="my-bg-secondary border-bottom border-primary py-2 ps-3">
+                <div class="my-bg-secondary border-bottom border-primary py-2 px-3">
                     <h5 class="mb-0 text-start"></h5>
-                        {% if user.is_authenticated %}
-                            You are currently logged in as <strong>{{ user.username }}</strong>
-                        {% else %}
-                            Welcome, <strong>Guest</strong>
-                        {% endif %}
+                    {% if user.is_authenticated %}
+                    You are currently logged in as <strong>{{ user.username }}</strong>
+                    {% else %}
+                    Welcome, <strong>Guest</strong>
+                    {% endif %}
                     </h5>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="my-bg-secondary border-bottom border-primary py-2 px-3">
+                    {% for message in messages %}
+                    <div class="alert {{ message.tags }} alert-dismissible fade show" id="msg" role="alert">
+                        {{ message|safe }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="container">
+    <!-- <div class="container">
         <div class="row">
             <div class="col-md-6 offset-md-2">
                 {% for message in messages %}
@@ -99,7 +109,7 @@
                 {% endfor %}
             </div>
         </div>
-    </div>
+    </div> -->
 
     <div class="bg-main-image">
         <!-- Main Content -->

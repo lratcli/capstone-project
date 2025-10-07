@@ -25,6 +25,7 @@
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">{{ system.name }}</h5>
                         <p class="card-text">{{ system.brief_description|truncatewords:20 }}</p>
+                        <p class="card-text">By: {{ system.created_by }}</p>
                         <p class="card-text text-muted small mb-2">
                             {{ system.manufacturer }} &middot; {{ system.release_year }}
                         </p>

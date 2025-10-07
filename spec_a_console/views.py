@@ -6,6 +6,7 @@ from django.utils.text import slugify
 from django.http import Http404
 from django.contrib import messages  # type: ignore
 from django.db.models import Avg  # for average rating calculation
+from django.core.paginator import Paginator  # for paginating my systems view
 from .models import ConsoleSystem
 from .forms import SystemReviewForm
 
@@ -20,7 +21,7 @@ class ConsoleSystemListView(generic.ListView):
     model = ConsoleSystem
     template_name = 'spec_a_console/index.html'
     context_object_name = 'console_systems'
-    paginate_by = 9
+    paginate_by = 8
     queryset = ConsoleSystem.objects.filter(
         approval=1).order_by('-created_on')
 
@@ -89,12 +90,20 @@ def my_console_systems_view(request):
         raise Http404("You must be logged in to view your systems.")
     user_systems = ConsoleSystem.objects.filter(
         created_by=request.user).order_by('-created_on')
+    
+    # Paginate with 8 systems per page (change as needed)
+    paginator = Paginator(user_systems, 2)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
     return render(
         request,
         'spec_a_console/my_systems.html',
         {
-            'user_systems': user_systems,
+            # 'user_systems': user_systems,
+            'user_systems': page_obj.object_list,
+            'page_obj': page_obj,
+            'is_paginated': page_obj.has_other_pages(),
         })
 
 
@@ -135,6 +144,9 @@ def edit_console_system_view(request, slug):
             edited_system.save()
             messages.success(request, "System updated successfully.")
             return redirect('system_detail', slug=system.slug)
+        # TODO: check this else statement thoroughly
+        else:
+            messages.error(request, 'Please correct the errors below.')
     else:
         form = ConsoleSystemForm(instance=system)
     return render(request, 'spec_a_console/edit_system.html', {'form': form, 'system': system})
