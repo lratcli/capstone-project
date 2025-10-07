@@ -76,7 +76,7 @@ p {
 }
 
 .awaiting-approval {
-    color: red;
+    color: rgb(224, 54, 54);
 }
 
 /* Styling for index.html and my_systems.html */
@@ -85,4 +85,32 @@ p {
     height: 200px;
     object-fit: cover;
     width: 100%;
+}
+
+/* Styling for buttons */
+
+.btn-login {
+    background-color: var(--highlight-color);
+    color: #fff;
+    border: 1px solid var(--light-highlight);
+}
+
+/* Styling to override Bootstrap alerts */
+
+.info {
+    background-color: rgb(255, 255, 168) !important; /* Choose your color */
+    color: #000000 !important;           /* Choose your text color */
+    border-color: rgb(131, 131, 0) !important;
+}
+
+.alert-success {
+    background-color: var(--light-highlight) !important; /* Choose your color */
+    color: #000000 !important;            /* Choose your text color */
+    border-color: var(--highlight-color) !important;
+}
+
+.alert-danger {
+    background-color: rgb(255, 193, 193) !important; /* Choose your color */
+    color: #000000 !important;            /* Choose your text color */
+    border-color: #e51616 !important;
 }

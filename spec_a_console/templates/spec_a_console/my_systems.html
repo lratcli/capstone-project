@@ -40,57 +40,32 @@
             </div>
         {% empty %}
             <div class="col-12">
-                <p class="text-center">No systems found.</p>
+                <h3 class="text-center">No systems found. Why not try creating one?</h3>
             </div>
         {% endfor %}
     </div>
 
     <!-- Pagination -->
     {% if is_paginated %}
-        <nav aria-label="Page navigation" class="mt-4">
-            <ul class="pagination justify-content-center">
-                {% if page_obj.has_previous %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
-                    </li>
-                {% endif %}
-                <li class="page-item disabled">
-                    <span class="page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
-                </li>
-                {% if page_obj.has_next %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
-                    </li>
-                {% endif %}
-            </ul>
-        </nav>
-    {% endif %}
-</div>
-
-    <!-- <h1>Your created fantasy gaming systems</h1>
-    <ul>
-        {% for system in user_systems %}
-            <li>
-                <strong>{{ system.name }}</strong> - {{ system.manufacturer }} ({{ system.release_year }})
-                <a href="{% url 'system_detail' system.slug %}" class="sysem-link">
-                                <h2>Link</h2>
-                            </a>
-            </li>
-        {% empty %}
-            <li>No systems found.</li>
-        {% endfor %}
-    </ul>
-    {% if is_paginated %}
-        <div>
+    <nav aria-label="Page navigation mt-4">
+        <ul class="pagination justify-content-center">
             {% if page_obj.has_previous %}
-                <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+            </li>
             {% endif %}
-            <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+            <li class="page-item disabled">
+                <span class="page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+            </li>
             {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}">Next</a>
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+            </li>
             {% endif %}
-        </div>
-    {% endif %} -->
+        </ul>
+    </nav>
+    {% endif %}
 
+</div>
 
 {% endblock %}
