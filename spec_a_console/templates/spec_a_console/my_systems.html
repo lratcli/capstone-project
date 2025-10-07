@@ -40,7 +40,7 @@
             </div>
         {% empty %}
             <div class="col-12">
-                <p class="text-center">No systems found.</p>
+                <h3 class="text-center">No systems found. Why not try creating one?</h3>
             </div>
         {% endfor %}
     </div>
@@ -66,31 +66,5 @@
         </nav>
     {% endif %}
 </div>
-
-    <!-- <h1>Your created fantasy gaming systems</h1>
-    <ul>
-        {% for system in user_systems %}
-            <li>
-                <strong>{{ system.name }}</strong> - {{ system.manufacturer }} ({{ system.release_year }})
-                <a href="{% url 'system_detail' system.slug %}" class="sysem-link">
-                                <h2>Link</h2>
-                            </a>
-            </li>
-        {% empty %}
-            <li>No systems found.</li>
-        {% endfor %}
-    </ul>
-    {% if is_paginated %}
-        <div>
-            {% if page_obj.has_previous %}
-                <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
-            {% endif %}
-            <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
-            {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}">Next</a>
-            {% endif %}
-        </div>
-    {% endif %} -->
-
 
 {% endblock %}

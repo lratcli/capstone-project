@@ -80,8 +80,11 @@ def console_system_detailed_view(request, slug):
         })
 
 
+@login_required
 def my_console_systems_view(request):
     """A view to list all ConsoleSystem instances created by the logged-in user."""
+    if not request.user.is_authenticated:
+        raise Http404("You must be logged in to view your systems.")
     user_systems = ConsoleSystem.objects.filter(
         created_by=request.user).order_by('-created_on')
 
@@ -93,6 +96,7 @@ def my_console_systems_view(request):
         })
 
 
+@login_required
 def create_console_system_view(request):
     """A view to create a new ConsoleSystem."""
     from .forms import ConsoleSystemForm  # Import here to avoid circular import

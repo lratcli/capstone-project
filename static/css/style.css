@@ -76,7 +76,7 @@ p {
 }
 
 .awaiting-approval {
-    color: red;
+    color: rgb(224, 54, 54);
 }
 
 /* Styling for index.html and my_systems.html */
@@ -85,4 +85,12 @@ p {
     height: 200px;
     object-fit: cover;
     width: 100%;
+}
+
+/* Styling for buttons */
+
+.btn-login {
+    background-color: var(--highlight-color);
+    color: #fff;
+    border: 1px solid var(--light-highlight);
 }
