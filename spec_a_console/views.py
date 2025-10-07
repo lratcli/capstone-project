@@ -43,6 +43,7 @@ def console_system_detailed_view(request, slug):
 
     # calculate average rating
     avg_rating = reviews.aggregate(Avg('rating'))['rating__avg'] or 0
+    avg_rating = round(avg_rating, 1)
 
     review_form = SystemReviewForm()
     user_has_reviewed = False
