@@ -9,6 +9,7 @@
     <div class="row">
         <div class="col-12 col-md-8 mx-auto">
             <h1 class="mb-3">{{ system.name }}</h1>
+            <p>User reviews: {{ review_count}}. Average review score: {{ avg_rating }}</p>
             <div class="card mb-4 shadow-sm">
                 {% if "placeholder" in system.featured_image.url %}
                 <img src="{% static 'images/placeholder-image.webp' %}" class="scale" alt="placeholder image">
@@ -30,6 +31,7 @@
                     <hr>
                     <h3 class="h6">Detailed Description</h3>
                     {{ system.detailed_description }}
+                    <hr>
                     <p class="text-muted small">Created by: {{ system.created_by.username }} on {{ system.created_on|date:"F j, Y" }}</p>
                     <p class="text-muted small">Last updated: {{ system.updated_on|date:"F j, Y" }}</p>
                 </div>

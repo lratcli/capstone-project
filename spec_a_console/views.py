@@ -5,6 +5,7 @@ from django.utils.text import slugify
 # from django.http import HttpResponse
 from django.http import Http404
 from django.contrib import messages  # type: ignore
+from django.db.models import Avg  # for average rating calculation
 from .models import ConsoleSystem
 from .forms import SystemReviewForm
 
@@ -26,9 +27,6 @@ class ConsoleSystemListView(generic.ListView):
 
 def console_system_detailed_view(request, slug):
     """A view to show details of a specific ConsoleSystem."""
-    # queryset = ConsoleSystem.objects.filter(approval=1)
-    # system = get_object_or_404(queryset, slug=slug)
-
     system = get_object_or_404(ConsoleSystem, slug=slug)
 
     # Only show unapproved systems to their creator
@@ -38,9 +36,12 @@ def console_system_detailed_view(request, slug):
     if system.approval != 1 and system.created_by == request.user:
         messages.info(request, "This system is awaiting approval.")
 
-    # addreviews of the system here
+    # add reviews of the system here
     reviews = system.reviews.filter().order_by('-created_on')
     review_count = system.reviews.filter(approved=True).count()
+
+    # calculate average rating
+    avg_rating = reviews.aggregate(Avg('rating'))['rating__avg'] or 0
 
     review_form = SystemReviewForm()
     user_has_reviewed = False
@@ -72,6 +73,7 @@ def console_system_detailed_view(request, slug):
         'spec_a_console/system_detail.html',
         {
             'system': system,
+            'avg_rating': avg_rating,
             'review_form': review_form,
             'review_count': review_count,
             'reviews': reviews,
@@ -142,7 +144,8 @@ def edit_console_system_view(request, slug):
 def delete_console_system_view(request, slug):
     system = get_object_or_404(ConsoleSystem, slug=slug)
     if request.user != system.created_by:
-        messages.error(request, "You do not have permission to delete this system.")
+        messages.error(request,
+                       "You do not have permission to delete this system.")
         return redirect('system_detail', slug=slug)
     if request.method == "POST":
         system.delete()
