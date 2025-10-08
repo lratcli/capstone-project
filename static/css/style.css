@@ -39,17 +39,6 @@ p {
     font-family: var(--secondary-font);
 }
 
-.section {
-    padding: 1rem 40px 40px 40px;
-    margin-left: 0px;
-    margin-right: 0px;
-    margin-top: 20px;
-    margin-bottom: 30px;
-
-    scroll-margin-top: 3rem;
-}
-
-
 .bg-main-image {
     background-image: url('/static/images/bg-image.webp');
     background-size: cover;

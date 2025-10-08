@@ -19,3 +19,9 @@ Bugs and issues:
 
 - cloudinary not auto delete
 - when editing system details, the name of the existing featured_image that was originally uploaded to cloudinary is not shown
+
+
+Features:
+
+- A user cannot review their own system
+- A user can only review a system once
