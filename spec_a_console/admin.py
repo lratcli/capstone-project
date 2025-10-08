@@ -12,11 +12,11 @@ class ConsoleSystemAdmin(SummernoteModelAdmin):
 
     list_display = (
         'name',
+        'created_by',
         'slug',
         'manufacturer',
         'release_year',
         'approval',
-        'created_by',
         'created_on',
         'updated_on',
     )
@@ -36,8 +36,13 @@ class SystemReviewAdmin(admin.ModelAdmin):
     Admin model for SystemReview.
     """
 
+    def system_creator(self, obj):
+        return obj.system.created_by
+    system_creator.short_description = 'System Creator'
+
     list_display = (
         'system',
+        'system_creator',
         'reviewer',
         'rating',
         'comment',
