@@ -67,6 +67,22 @@ p {
 }
 
 
+/* Styling for review cards */
+
+.review-section-bg {
+    background-color: var(--highlight-color);
+}
+
+.review-user-bg {
+    background-color: var(--secondary-color);
+}
+
+.review-score-bg {
+    background-color: var(--light-highlight);
+}
+
+/* general backgrounds */
+
 .my-bg-primary {
     background-color: var(--primary-color)
 }
@@ -74,6 +90,8 @@ p {
 .my-bg-secondary {
     background-color: var(--secondary-color);
 }
+
+/* special font colours */
 
 .awaiting-approval {
     color: rgb(224, 54, 54);
