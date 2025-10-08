@@ -6,7 +6,7 @@
 
 {% block content %}
 <div class="container my-4">
-    <div class="row">
+    <div class="row mb-4">
         <div class="col-12 col-md-8 mx-auto">
             <h1 class="mb-3">{{ system.name }}</h1>
             <p>User reviews: {{ review_count}}. Average review score: {{ avg_rating }}</p>
@@ -54,26 +54,31 @@
     </div>
 
     <!-- Creating New System reviews -->
-    <div class="col-md-4 card mb-4 mt-3">
+    <div class="row">
+    <div class="col-12 col-md-8 mx-auto card mb-4 mt-3">
         <div class="card-body">
             {% if user.is_authenticated %}
             {% if user_is_creator %}
-            <p class="text-warning">You cannot review your own system.</p>
+            <p class="text-warning text-center">You cannot review your own system.</p>
             {% elif user_has_reviewed %}
-            <p class="text-warning">You have already submitted a review for this system.</p>
+            <p class="text-warning text-center">You have already submitted a review for this system.</p>
             {% else %}
             <h3>Leave a review:</h3>
             <p>You are logged in as: {{ user.username }}</p>
             <form id="reviewForm" method="post" style="margin-top: 1.3em;">
                 {{ review_form | crispy }}
                 {% csrf_token %}
-                <button id="submitButton" type="submit" class="btn btn-signup btn-lg">Submit</button>
+                <div class="d-flex justify-content-between">
+                <button id="submitButton" type="submit" class="btn btn-login btn-lg">Submit</button>
+                <button type="reset" class="btn btn-cancel btn-lg ms-2">Clear</button>
+                </div>
             </form>
             {% endif %}
             {% else %}
             <p>Log in to add a review for this fantasy system!</p>
             {% endif %}
         </div>
+    </div>
     </div>
 
     <!-- Displaying count of user reviews -->
@@ -115,7 +120,7 @@
                     </p>
                     {% endif %}
 
-                    <!-- Edit / Delete review for user-owner will go here -->
+                    <!-- Edit / Delete review for a reviews user-owner will go here -->
 
                 </div>
                 <!-- Our for loop ends here -->

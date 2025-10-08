@@ -95,10 +95,16 @@ p {
     border: 1px solid var(--light-highlight);
 }
 
+.btn-cancel {
+    background-color: rgb(170, 130, 0);
+    color: #fff;
+    border: 1px solid  rgb(105, 73, 18);
+}
+
 /* Styling to override Bootstrap alerts */
 
 .info {
-    background-color: rgb(255, 255, 168) !important; /* Choose your color */
+    background-color: rgb(127, 127, 38) !important; /* Choose your color */
     color: #000000 !important;           /* Choose your text color */
     border-color: rgb(131, 131, 0) !important;
 }
