@@ -12,8 +12,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
-import dj_database_url
-from django.contrib.messages import constants as messages
+import dj_database_url  # type: ignore
+from django.contrib.messages import constants as messages  # type: ignore
 if os.path.isfile('env.py'):
     import env  # noqa: E:401
 
@@ -104,6 +104,7 @@ WSGI_APPLICATION = 'capstone_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# keeping as reference for future potential changes to local dev env
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',

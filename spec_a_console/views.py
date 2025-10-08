@@ -1,19 +1,15 @@
-from django.shortcuts import redirect, render, get_object_or_404, reverse  # noqa: F401, E501, # type: ignore
-from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect, render  # type: ignore
+from django.shortcuts import get_object_or_404  # type: ignore
+from django.contrib.auth.decorators import login_required  # type: ignore
 from django.views import generic  # type: ignore
-from django.utils.text import slugify
-# from django.http import HttpResponse
-from django.http import Http404
+from django.utils.text import slugify  # type: ignore
+from django.http import Http404  # type: ignore
 from django.contrib import messages  # type: ignore
-from django.db.models import Avg  # for average rating calculation
-from django.core.paginator import Paginator  # for paginating my systems view
+from django.db.models import Avg  # for average rating calc # type: ignore
+# Below: for paginating my systems view
+from django.core.paginator import Paginator  # type: ignore
 from .models import ConsoleSystem
 from .forms import SystemReviewForm
-
-
-# Create your views here.
-# def index(request):
-#     return HttpResponse("Hello, this is the spec_a_console index page.")
 
 
 class ConsoleSystemListView(generic.ListView):
@@ -21,7 +17,7 @@ class ConsoleSystemListView(generic.ListView):
     model = ConsoleSystem
     template_name = 'spec_a_console/index.html'
     context_object_name = 'console_systems'
-    paginate_by = 8
+    paginate_by = 6
     queryset = ConsoleSystem.objects.filter(
         approval=1).order_by('-created_on')
 
@@ -30,7 +26,7 @@ def console_system_detailed_view(request, slug):
     """A view to show details of a specific ConsoleSystem."""
     system = get_object_or_404(ConsoleSystem, slug=slug)
 
-    # Only show unapproved systems to their creator
+    # Only show unapproved systems if accessed by their creator
     if system.approval != 1 and system.created_by != request.user:
         raise Http404("No ConsoleSystem matches the given query.")
 
@@ -45,26 +41,34 @@ def console_system_detailed_view(request, slug):
     avg_rating = reviews.aggregate(Avg('rating'))['rating__avg'] or 0
     avg_rating = round(avg_rating, 1)
 
+    # Handle review submission
     review_form = SystemReviewForm()
     user_has_reviewed = False
-    user_is_creator = request.user.is_authenticated and request.user == system.created_by
+    user_is_creator = (request.user.is_authenticated and
+                       request.user == system.created_by)
 
+    # Check if user is valid reviewer and has already reviewed the system
     if request.user.is_authenticated and not user_is_creator:
-        user_has_reviewed = system.reviews.filter(reviewer=request.user).exists()
+        user_has_reviewed = system.reviews.filter(
+            reviewer=request.user).exists()
 
         if request.method == "POST":
             if user_has_reviewed:
-                messages.error(request, "You have already submitted a review for this system.")
+                messages.error(
+                    request,
+                    "You have already submitted a review for this system.")
             else:
                 review_form = SystemReviewForm(data=request.POST)
                 if review_form.is_valid():
-                    review = review_form.save(commit=False)  # get form ref w/out sav
+                    review = review_form.save(commit=False)  # get ref no save
                     review.reviewer = request.user  # finsih populating form
-                    review.system = system  # get ref to post comment is being put on
+                    # get ref to post review is being put on
+                    review.system = system
                     review.save()  # now time to save
                     # Below: send message to user confirming submission
-                    messages.add_message(request, messages.SUCCESS,
-                                         'Review submitted and awaiting approval')
+                    messages.add_message(
+                        request, messages.SUCCESS,
+                        'Review submitted and awaiting approval')
                     # Redirect to the same page to prevent resubmission
                     return redirect('system_detail', slug=system.slug)
     elif request.method == "POST":
@@ -86,14 +90,17 @@ def console_system_detailed_view(request, slug):
 
 @login_required
 def my_console_systems_view(request):
-    """A view to list all ConsoleSystem instances created by the logged-in user."""
+    """
+    A view to list all ConsoleSystem instances created
+      by the logged-in user.
+    """
     if not request.user.is_authenticated:
         raise Http404("You must be logged in to view your systems.")
     user_systems = ConsoleSystem.objects.filter(
         created_by=request.user).order_by('-created_on')
-    
+
     # Paginate with 8 systems per page (change as needed)
-    paginator = Paginator(user_systems, 2)
+    paginator = Paginator(user_systems, 6)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -111,7 +118,9 @@ def my_console_systems_view(request):
 @login_required
 def create_console_system_view(request):
     """A view to create a new ConsoleSystem."""
-    from .forms import ConsoleSystemForm  # Import here to avoid circular import
+
+    # Import here to avoid circular import
+    from .forms import ConsoleSystemForm
 
     if request.method == 'POST':
         form = ConsoleSystemForm(request.POST, request.FILES)
@@ -127,13 +136,16 @@ def create_console_system_view(request):
     else:
         form = ConsoleSystemForm()
 
-    return render(request, 'spec_a_console/create_system.html', {'create_form': form})
+    return render(request,
+                  'spec_a_console/create_system.html',
+                  {'create_form': form})
 
 
 @login_required
 def edit_console_system_view(request, slug):
     """A view to edit an existing ConsoleSystem."""
-    from .forms import ConsoleSystemForm  # Import here to avoid circular import
+    # Import here to avoid circular import:
+    from .forms import ConsoleSystemForm
     system = get_object_or_404(ConsoleSystem, slug=slug)
     if request.user != system.created_by:
         raise Http404("You do not have permission to edit this system.")
@@ -150,7 +162,14 @@ def edit_console_system_view(request, slug):
             messages.error(request, 'Please correct the errors below.')
     else:
         form = ConsoleSystemForm(instance=system)
-    return render(request, 'spec_a_console/edit_system.html', {'form': form, 'system': system})
+    return render(
+        request,
+        'spec_a_console/edit_system.html',
+        {
+            'form': form,
+            'system': system
+        }
+    )
 
 
 @login_required

@@ -1,4 +1,4 @@
-from django import forms
+from django import forms  # type: ignore
 from .models import ConsoleSystem
 from .models import SystemReview
 
@@ -53,28 +53,12 @@ class SystemReviewForm(forms.ModelForm):
             'rating',
             'comment',
         )
-#        widgets = {
-#            'review_date': forms.DateInput(attrs={'type': 'date'}),
-#            'review_text': forms.Textarea(attrs={'rows': 4}),
-#        }
-#        labels = {
-#            'console': 'Console Reviewed',
-#            'reviewer_name': 'Reviewer Name',
-#            'rating': 'Rating (1-10)',
-#            'review_text': 'Review Text',
-#            'review_date': 'Review Date',
-#        }
-#        help_texts = {
-#            'rating': 'Rate the console on a scale from 1 to 10.',
-#            'review_date': 'Select the date of the review.',
-#        }
-#        error_messages = {
-#            'rating': {
-#                'invalid': 'Enter a valid rating between 1 and 10.',
-#                'max_value': 'Rating cannot be more than 10.',
-#                'min_value': 'Rating cannot be less than 1.',
-#            },
-#            'reviewer_name': {
-#                'max_length': 'The reviewer name is too long.',
-#            },
-#        }
+        widgets = {
+            'comment': forms.Textarea(attrs={
+                'rows': 2,
+                'style': 'resize:vertical; width:100%;',
+                'oninput':
+                "this.style.height='';"
+                "this.style.height=this.scrollHeight+'px'"
+            }),
+        }

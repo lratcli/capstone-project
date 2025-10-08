@@ -3,7 +3,6 @@
 
 {% block content %}
 
-
 <div class="container my-4">
     <!-- Header and brief description -->
     <div class="row mb-4">
@@ -16,9 +15,9 @@
     </div>
 
     <!-- Responsive grid of system cards -->
-    <div class="row g-4">
+    <div class="row g-4 mb-4">
         {% for system in user_systems %}
-            <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+            <div class="col-12 col-sm-6 col-lg-4">
                 <div class="card h-100">
                     {% if "placeholder" in system.featured_image.url %}
                     <img src="{% static 'images/placeholder-image.webp' %}" class="card-img-top card-img-fixed" alt="placeholder image">
@@ -47,11 +46,11 @@
 
     <!-- Pagination -->
     {% if is_paginated %}
-    <nav aria-label="Page navigation mt-4">
+    <nav aria-label="Page navigation" class=" mt-5">
         <ul class="pagination justify-content-center">
             {% if page_obj.has_previous %}
             <li class="page-item">
-                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&lt;&lt; Previous</a>
             </li>
             {% endif %}
             <li class="page-item disabled">
@@ -59,7 +58,7 @@
             </li>
             {% if page_obj.has_next %}
             <li class="page-item">
-                <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next &gt;&gt;</a>
             </li>
             {% endif %}
         </ul>

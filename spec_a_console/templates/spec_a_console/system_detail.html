@@ -6,7 +6,7 @@
 
 {% block content %}
 <div class="container my-4">
-    <div class="row">
+    <div class="row mb-4">
         <div class="col-12 col-md-8 mx-auto">
             <h1 class="mb-3">{{ system.name }}</h1>
             <p>User reviews: {{ review_count}}. Average review score: {{ avg_rating }}</p>
@@ -18,8 +18,9 @@
                 {% endif %}
                 <div class="card-body">
                     {% if system.approval != 1%}
-                    <p class="awaiting-approval"><strong>This system is currently awaiting approval, and is currently only visible
-                        by you</strong></p>
+                    <p class="awaiting-approval"><strong>This system is currently awaiting approval, and is currently
+                            only visible
+                            by you</strong></p>
                     {% endif %}
                     <h2 class="h5">Manufacturer: <span class="fw-normal">{{ system.manufacturer }}</span></h2>
                     <p><strong>Release Year:</strong> {{ system.release_year }}</p>
@@ -32,51 +33,58 @@
                     <h3 class="h6">Detailed Description</h3>
                     {{ system.detailed_description }}
                     <hr>
-                    <p class="text-muted small">Created by: {{ system.created_by.username }} on {{ system.created_on|date:"F j, Y" }}</p>
+                    <p class="text-muted small">Created by: {{ system.created_by.username }} on 
+                        {{system.created_on|date:"F j, Y" }}</p>
                     <p class="text-muted small">Last updated: {{ system.updated_on|date:"F j, Y" }}</p>
                 </div>
             </div>
-            <div>
+            <div class="d-flex justify-content-around align-items-center mt-5 mb-5">
                 {% if user.is_authenticated and system.created_by == user %}
+                <!-- Edit button -->
+                <a href="{% url 'edit_system' system.slug %}" class="btn btn-warning">Edit System</a>
                 <!-- Delete Button -->
                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteSystemModal">
                     Delete System </button>
-                <!-- Edit button -->
-                <a href="{% url 'edit_system' system.slug %}" class="btn btn-warning">Edit System</a>
                 {% endif %}
             </div>
-
-            <a href="{% url 'index' %}" class="btn btn-primary" aria-label="Back to list">Back to List</a>
+            <div class="d-flex justify-content-center">
+                <a href="{% url 'index' %}" class="btn btn-primary" aria-label="Back to home page">&lt;&lt; Home</a>
+            </div>
         </div>
     </div>
 
     <!-- Creating New System reviews -->
-        <div class="col-md-4 card mb-4 mt-3">
+    <div class="row">
+        <div class="col-12 col-md-8 mx-auto card mb-4 mt-4">
             <div class="card-body">
                 {% if user.is_authenticated %}
-                    {% if user_is_creator %}
-                        <p class="text-warning">You cannot review your own system.</p>
-                    {% elif user_has_reviewed %}
-                        <p class="text-warning">You have already submitted a review for this system.</p>
-                    {% else %}    
-                        <h3>Leave a review:</h3>
-                        <p>You are logged in as: {{ user.username }}</p>
-                        <form id="reviewForm" method="post" style="margin-top: 1.3em;">
-                            {{ review_form | crispy }}
-                            {% csrf_token %}
-                            <button id="submitButton" type="submit" class="btn btn-signup btn-lg">Submit</button>
-                        </form>
-                    {% endif %}
+                {% if user_is_creator %}
+                <p class="text-center my-1">You cannot review your own system.</p>
+                {% elif user_has_reviewed %}
+                <p class="text-center my-1">You have already submitted a review for this system.</p>
                 {% else %}
-                    <p>Log in to add a review for this fantasy system!</p>
+                <h3>Leave a review:</h3>
+                <p>You are logged in as: {{ user.username }}</p>
+                <form id="reviewForm" method="post" style="margin-top: 1.3em;">
+                    {{ review_form | crispy }}
+                    {% csrf_token %}
+                    <div class="d-flex justify-content-between">
+                        <button id="submitButton" type="submit" class="btn btn-login btn-lg">Submit</button>
+                        <button type="reset" class="btn btn-cancel btn-lg ms-2">Clear</button>
+                    </div>
+                </form>
+                {% endif %}
+                {% else %}
+                <p>Log in to add a review for this fantasy system!</p>
                 {% endif %}
             </div>
         </div>
+    </div>
 
-        <!-- Displaying count of user reviews -->
+    <!-- Displaying count of user reviews -->
     <div class="row">
-        <div class="col-12">
-            <strong class="text-secondary">
+        <div class="col-12 text-center">
+            <strong>
                 <i class="far fa-comments">Review count: </i> {{ review_count }}
             </strong>
         </div>
@@ -86,61 +94,68 @@
     </div>
     <!-- Displaying Reviews -->
     <div class="row">
-        <div class="col-md-8 card mb-4  mt-3 ">
-            <h3>Reviews:</h3>
+        <div class="col-md-8 mx-auto card mb-4 mt-3 review-section-bg">
+            <h3 class="mt-3 text-white">Reviews:</h3>
             <div class="card-body">
                 <!-- Loop to display any number of reviews -->
                 {% for review in reviews %}
-                <div class="p-2 reviews
-                    {% if not review.approved and review.reviewer == user %}
-                    faded{% elif not review.approved %} d-none{% endif %}">
-                    <p class="font-weight-bold">
-                        {{ review.reviewer }}
-                        <span class="font-weight-normal">
-                            {{ review.created_on }}
-                        </span> wrote:
-                    </p>
-                    <div id="review{{ review.id }}">
-                        {{ review.comment | linebreaks }}
+                <div class="card my-2">
+                <!-- Below: if it's not approved, and you're not the reviewer, hide  -->
+                <div class="p-2 
+                        {% if not review.approved and not review.reviewer == user %}
+                        d-none {% endif %}">
+                        <p class="text-muted small review-user-bg">
+                            {{ review.reviewer }}: 
+                            <span class="text-muted small">
+                                {{ review.created_on }}
+                            </span> wrote:
+                        </p>
+                        {% if not review.approved and review.reviewer == user %}
+                        <p class="awaiting-approval">
+                            Your review is awaiting approval
+                        </p>
+                        {% endif %}
+                        <hr>
+                        <div id="review{{ review.id }}">
+                            {{ review.comment | linebreaks }}
+                        </div>
+                        <hr>
+                        <div class="text-muted small review-score-bg">
+                            Score: {{ review.rating }}
+                        </div>
+                        <!-- Edit / Delete review for a reviews user-owner will go here -->
                     </div>
-                    <div>
-                        Score: {{ review.rating }}
-                    </div>
-                    {% if not review.approved and review.reviewer == user %}
-                    <p class="approval">
-                        This review is awaiting approval
-                    </p>
-                    {% endif %}
-
-                    <!-- Edit / Delete review for user-owner will go here -->
-
                 </div>
                 <!-- Our for loop ends here -->
                 {% endfor %}
+                {% if review_count == 0 %}
+                    <p class="text-white">There are no approved reviews for this system yet</p>
+                {% endif %}
             </div>
         </div>
     </div>
 </div>
 
 <!-- Delete Confirmation Modal -->
-<div class="modal fade" id="deleteSystemModal" tabindex="-1" aria-labelledby="deleteSystemModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bg-danger text-white">
-        <h5 class="modal-title" id="deleteSystemModalLabel">Confirm Delete</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>Are you sure you want to delete <strong>{{ system.name }}</strong>? This action cannot be undone.</p>
-      </div>
-      <div class="modal-footer">
-        <form method="post" action="{% url 'delete_system' system.slug %}">
-            {% csrf_token %}
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button type="submit" class="btn btn-danger">Delete</button>
-        </form>
-      </div>
+<div class="modal fade" id="deleteSystemModal" tabindex="-1" aria-labelledby="deleteSystemModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="deleteSystemModalLabel">Confirm Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body bg-black text-white">
+                <p>Are you sure you want to delete <strong>{{ system.name }}</strong>? This action cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <form method="post" action="{% url 'delete_system' system.slug %}">
+                    {% csrf_token %}
+                    <button type="button" class="btn btn-secondary me-5" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 {% endblock %}

@@ -39,23 +39,12 @@ p {
     font-family: var(--secondary-font);
 }
 
-.section {
-    padding: 1rem 40px 40px 40px;
-    margin-left: 0px;
-    margin-right: 0px;
-    margin-top: 20px;
-    margin-bottom: 30px;
-
-    scroll-margin-top: 3rem;
-}
-
-
 .bg-main-image {
     background-image: url('/static/images/bg-image.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-color: rgba(0, 0, 0, 0.5); /*Black overlay, 50% opacity
+    background-color: rgba(0, 0, 0, 0.5); /*Black overlay, 50% opacity */
     min-height: 300px; /* Adjust as needed */
     width: 100%;
     color: white; /* Optional: for text contrast */
@@ -67,6 +56,22 @@ p {
 }
 
 
+/* Styling for review cards */
+
+.review-section-bg {
+    background-color: var(--highlight-color);
+}
+
+.review-user-bg {
+    background-color: var(--secondary-color);
+}
+
+.review-score-bg {
+    background-color: var(--light-highlight);
+}
+
+/* general backgrounds */
+
 .my-bg-primary {
     background-color: var(--primary-color)
 }
@@ -74,6 +79,8 @@ p {
 .my-bg-secondary {
     background-color: var(--secondary-color);
 }
+
+/* special font colours */
 
 .awaiting-approval {
     color: rgb(224, 54, 54);
@@ -95,10 +102,16 @@ p {
     border: 1px solid var(--light-highlight);
 }
 
+.btn-cancel {
+    background-color: rgb(170, 130, 0);
+    color: #fff;
+    border: 1px solid  rgb(105, 73, 18);
+}
+
 /* Styling to override Bootstrap alerts */
 
 .info {
-    background-color: rgb(255, 255, 168) !important; /* Choose your color */
+    background-color: rgb(221, 221, 140) !important; /* Choose your color */
     color: #000000 !important;           /* Choose your text color */
     border-color: rgb(131, 131, 0) !important;
 }
