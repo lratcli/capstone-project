@@ -12,6 +12,8 @@ Testing:
 | Row 3    | Example  | Entry    |
 
 
+- navigation controls appear when pagination threshold is reached for main page / index.html - pass
+- navigation controls appear when pagination threshold is reached for my_systems.html - pass
 
 Bugs and issues:
 
