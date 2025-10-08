@@ -21,7 +21,7 @@ class ConsoleSystemListView(generic.ListView):
     model = ConsoleSystem
     template_name = 'spec_a_console/index.html'
     context_object_name = 'console_systems'
-    paginate_by = 8
+    paginate_by = 3
     queryset = ConsoleSystem.objects.filter(
         approval=1).order_by('-created_on')
 
