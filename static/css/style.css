@@ -122,7 +122,7 @@ p {
 /* Styling to override Bootstrap alerts */
 
 .info {
-    background-color: rgb(127, 127, 38) !important; /* Choose your color */
+    background-color: rgb(221, 221, 140) !important; /* Choose your color */
     color: #000000 !important;           /* Choose your text color */
     border-color: rgb(131, 131, 0) !important;
 }

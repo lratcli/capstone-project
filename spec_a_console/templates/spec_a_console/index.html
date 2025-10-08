@@ -7,61 +7,62 @@
     <!-- Header and brief description -->
     <div class="row mb-4">
         <div class="col-12 text-center">
-            <h2 class="display-6">Spec A Console Users' Latest Fantasy Systems</h2>
-            <p class="lead">Browse the latest fantasy console systems created by our users. Click a card to see more details!</p>
+            <h2 class="display-6">Spec A Console:</h2>
+            <h3 class="pb-4">Create an account, create a system, and re-live the playground arguments of the past!</h3>
+            <p class="lead pt-3"><em>Browse the latest fantasy console systems created by our users. 
+                Click a card to see more details!</em></p>
         </div>
     </div>
 
     <!-- Responsive grid of system cards -->
     <div class="row g-4 mb-4">
         {% for system in console_systems %}
-            <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
-                <div class="card h-100">
-                    {% if "placeholder" in system.featured_image.url %}
-                    <img src="{% static 'images/placeholder-image.webp' %}" class="card-img-top card-img-fixed" alt="placeholder image">
-                    {% else %}
-                    <img src="{{ system.featured_image.url }}" class="card-img-top card-img-fixed" alt="{{ system.name }}">
-                    {% endif %}
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">{{ system.name }}</h5>
-                        <p class="card-text">{{ system.brief_description|truncatewords:20 }}</p>
-                        <p class="card-text">By: {{ system.created_by }}</p>
-                        <p class="card-text text-muted small mb-2">
-                            {{ system.manufacturer }} &middot; {{ system.release_year }}
-                        </p>
-                        <a href="{% url 'system_detail' system.slug %}" class="btn btn-primary mt-auto">View Details</a>
-                    </div>
+        <div class="col-12 col-sm-6 col-lg-4">
+            <div class="card h-100">
+                {% if "placeholder" in system.featured_image.url %}
+                <img src="{% static 'images/placeholder-image.webp' %}" class="card-img-top card-img-fixed"
+                    alt="placeholder image">
+                {% else %}
+                <img src="{{ system.featured_image.url }}" class="card-img-top card-img-fixed" alt="{{ system.name }}">
+                {% endif %}
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">{{ system.name }}</h5>
+                    <p class="card-text">{{ system.brief_description|truncatewords:20 }}</p>
+                    <p class="card-text">By: {{ system.created_by }}</p>
+                    <p class="card-text text-muted small mb-2">
+                        {{ system.manufacturer }} &middot; {{ system.release_year }}
+                    </p>
+                    <a href="{% url 'system_detail' system.slug %}" class="btn btn-primary mt-auto">View Details</a>
                 </div>
             </div>
+        </div>
         {% empty %}
-            <div class="col-12">
-                <p class="text-center">No systems found.</p>
-            </div>
+        <div class="col-12">
+            <p class="text-center">No systems found.</p>
+        </div>
         {% endfor %}
     </div>
 
     <!-- Pagination -->
     {% if is_paginated %}
-        <nav aria-label="Page navigation" class="mt-5">
-            <ul class="pagination justify-content-center">
-                {% if page_obj.has_previous %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&lt;&lt; Previous</a>
-                    </li>
-                {% endif %}
-                <li class="page-item disabled">
-                    <span class="page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
-                </li>
-                {% if page_obj.has_next %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next &gt;&gt;
-</a>
-                    </li>
-                {% endif %}
-            </ul>
-        </nav>
+    <nav aria-label="Page navigation" class="mt-5">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&lt;&lt; Previous</a>
+            </li>
+            {% endif %}
+            <li class="page-item disabled">
+                <span class="page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+            </li>
+            {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next &gt;&gt;</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
     {% endif %}
 </div>
-
 
 {% endblock %}

@@ -100,15 +100,21 @@
                 <!-- Loop to display any number of reviews -->
                 {% for review in reviews %}
                 <div class="card my-2">
-                    <div class="p-2 reviews
-                        {% if not review.approved and review.reviewer == user %}
-                        faded{% elif not review.approved %} d-none{% endif %}">
+                <!-- Below: if it's not approved, and you're not the reviewer, hide  -->
+                <div class="p-2 
+                        {% if not review.approved and not review.reviewer == user %}
+                        d-none {% endif %}">
                         <p class="text-muted small review-user-bg">
                             {{ review.reviewer }}: 
                             <span class="text-muted small">
                                 {{ review.created_on }}
                             </span> wrote:
                         </p>
+                        {% if not review.approved and review.reviewer == user %}
+                        <p class="awaiting-approval">
+                            Your review is awaiting approval
+                        </p>
+                        {% endif %}
                         <hr>
                         <div id="review{{ review.id }}">
                             {{ review.comment | linebreaks }}
@@ -117,20 +123,13 @@
                         <div class="text-muted small review-score-bg">
                             Score: {{ review.rating }}
                         </div>
-                        {% if not review.approved and review.reviewer == user %}
-                        <p class="approval">
-                            This review is awaiting approval
-                        </p>
-                        {% endif %}
-
                         <!-- Edit / Delete review for a reviews user-owner will go here -->
-
                     </div>
                 </div>
                 <!-- Our for loop ends here -->
                 {% endfor %}
                 {% if review_count == 0 %}
-                    <p class="text-white">There are no reviews for this system yet</p>
+                    <p class="text-white">There are no approved reviews for this system yet</p>
                 {% endif %}
             </div>
         </div>

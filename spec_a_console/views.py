@@ -17,7 +17,7 @@ class ConsoleSystemListView(generic.ListView):
     model = ConsoleSystem
     template_name = 'spec_a_console/index.html'
     context_object_name = 'console_systems'
-    paginate_by = 4
+    paginate_by = 6
     queryset = ConsoleSystem.objects.filter(
         approval=1).order_by('-created_on')
 
@@ -100,7 +100,7 @@ def my_console_systems_view(request):
         created_by=request.user).order_by('-created_on')
 
     # Paginate with 8 systems per page (change as needed)
-    paginator = Paginator(user_systems, 4)
+    paginator = Paginator(user_systems, 6)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 

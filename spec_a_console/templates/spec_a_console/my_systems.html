@@ -18,7 +18,7 @@
     <!-- Responsive grid of system cards -->
     <div class="row g-4 mb-4">
         {% for system in user_systems %}
-            <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+            <div class="col-12 col-sm-6 col-lg-4">
                 <div class="card h-100">
                     {% if "placeholder" in system.featured_image.url %}
                     <img src="{% static 'images/placeholder-image.webp' %}" class="card-img-top card-img-fixed" alt="placeholder image">
