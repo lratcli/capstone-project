@@ -1,7 +1,8 @@
 from django.db import models  # type: ignore
 from django.contrib.auth.models import User  # type: ignore
 from cloudinary.models import CloudinaryField  # type: ignore
-from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.validators import MinValueValidator  # type: ignore
+from django.core.validators import MaxValueValidator  # type: ignore
 
 
 # Create your models here.
