@@ -48,7 +48,7 @@
                 {% endif %}
             </div>
             <div class="d-flex justify-content-center">
-                <a href="{% url 'index' %}" class="btn btn-primary" aria-label="Back to list">&lt;&lt; Home</a>
+                <a href="{% url 'index' %}" class="btn btn-primary" aria-label="Back to home page">&lt;&lt; Home</a>
             </div>
         </div>
     </div>
@@ -129,6 +129,9 @@
                 </div>
                 <!-- Our for loop ends here -->
                 {% endfor %}
+                {% if review_count == 0 %}
+                    <p class="text-white">There are no reviews for this system yet</p>
+                {% endif %}
             </div>
         </div>
     </div>
