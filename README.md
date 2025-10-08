@@ -15,6 +15,13 @@ Testing:
 - navigation controls appear when pagination threshold is reached for main page / index.html - pass
 - navigation controls appear when pagination threshold is reached for my_systems.html - pass
 
+    Testing exceptions:
+
+    - where the error: 
+    # type: ignore was used to suppress these false reports of errors. Good hygiene with regards to incorrect error messages is important in becuase it maintains focus on real error messages
+
+
+
 Bugs and issues:
 
 - cloudinary not auto delete

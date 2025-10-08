@@ -1,4 +1,4 @@
-from django.contrib import admin
+from django.contrib import admin  # type: ignore
 from .models import ConsoleSystem, SystemReview
 from django_summernote.admin import SummernoteModelAdmin  # type: ignore
 
