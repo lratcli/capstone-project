@@ -130,7 +130,7 @@ main {
     color: #fff !important;
 }
 
-/* Styling to override Bootstrap alerts */
+/* Styling to override Bootstrap alert styling */
 
 .info {
     background-color: rgb(221, 221, 140) !important; /* Choose your color */
