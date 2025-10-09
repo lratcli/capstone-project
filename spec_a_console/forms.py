@@ -4,6 +4,16 @@ from .models import SystemReview
 
 
 class ConsoleSystemForm(forms.ModelForm):
+    """
+    A form for creating and editing ConsoleSystem instances.
+    Includes validation for non-negative launch price.
+    """
+    featured_image = forms.ImageField(required=False)
+    launch_rrp_unadjusted = forms.DecimalField(
+        min_value=0,
+        error_messages={'min_value': 'Price cannot be negative.'}
+    )
+
     class Meta:
         model = ConsoleSystem
         fields = [
@@ -19,7 +29,6 @@ class ConsoleSystemForm(forms.ModelForm):
             'brief_description',
         ]
         widgets = {
-            # 'release_year': forms.DateInput(attrs={'type': 'date'}),
             'detailed_description': forms.Textarea(attrs={'rows': 4}),
             'brief_description': forms.Textarea(attrs={'rows': 4}),
         }
@@ -47,6 +56,9 @@ class ConsoleSystemForm(forms.ModelForm):
 
 
 class SystemReviewForm(forms.ModelForm):
+    """
+    A form for submitting reviews for a ConsoleSystem.
+    """
     class Meta:
         model = SystemReview
         fields = (

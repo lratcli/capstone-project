@@ -39,7 +39,20 @@ p {
     font-family: var(--secondary-font);
 }
 
+
+/* Ensure footer at bottom, main fills all space between header and footer, 
+and bg-image scales to cover <main> / {% block %} inheriting template area */
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
 .bg-main-image {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     background-image: url('/static/images/bg-image.webp');
     background-size: cover;
     background-position: center;
@@ -53,6 +66,10 @@ p {
     justify-content: center;
     /* background-blend-mode makes the color blend with the image */
     background-blend-mode: darken;
+}
+
+main {
+    flex: 1;
 }
 
 
@@ -106,6 +123,11 @@ p {
     background-color: rgb(170, 130, 0);
     color: #fff;
     border: 1px solid  rgb(105, 73, 18);
+}
+
+/* Override cripyforms/django form-text style to make help text white for my black bg */
+.form-text {
+    color: #fff !important;
 }
 
 /* Styling to override Bootstrap alerts */
