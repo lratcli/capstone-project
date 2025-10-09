@@ -13,7 +13,10 @@ from .forms import SystemReviewForm
 
 
 class ConsoleSystemListView(generic.ListView):
-    """A view to list all approved ConsoleSystem instances."""
+    """
+    A view to list all approved ConsoleSystem instances.
+    Paginated to show 6 systems per page.
+    """
     model = ConsoleSystem
     template_name = 'spec_a_console/index.html'
     context_object_name = 'console_systems'
@@ -23,7 +26,21 @@ class ConsoleSystemListView(generic.ListView):
 
 
 def console_system_detailed_view(request, slug):
-    """A view to show details of a specific ConsoleSystem."""
+    """
+    A view to show details of a specific ConsoleSystem.
+    Also handles review submission and display.
+
+    **Context**
+    ``system``: An instance of :model: `spec_a_console.ConsoleSystem`
+    ``reviews``: All instances of :model: `spec_a_console.SystemReview`
+         related to the ConsoleSystem instance.
+
+    **Template:**
+    :template: `spec_a_console/system_detail.html`
+
+    An instance of :model: `spec_a_console.SystemReview` can be created
+    by users to provide feedback on the ConsoleSystem.
+    """
     system = get_object_or_404(ConsoleSystem, slug=slug)
 
     # Only show unapproved systems if accessed by their creator
@@ -91,8 +108,18 @@ def console_system_detailed_view(request, slug):
 @login_required
 def my_console_systems_view(request):
     """
-    A view to list all ConsoleSystem instances created
+    A view to list and view all ConsoleSystem instances created
       by the logged-in user.
+
+    Paginated to show 6 systems per page.
+
+    **Context**
+    ``user_systems``: All instances of :model: `spec_a_console.ConsoleSystem`
+        created by the logged-in user. This list also includes systems
+        currently pending approval.
+
+    **Template:**
+    :template: `spec_a_console/my_systems.html`
     """
     if not request.user.is_authenticated:
         raise Http404("You must be logged in to view your systems.")
@@ -117,7 +144,17 @@ def my_console_systems_view(request):
 
 @login_required
 def create_console_system_view(request):
-    """A view to create a new ConsoleSystem."""
+    """
+    A view to create a new ConsoleSystem.
+    Only accessible to logged-in users.
+
+    **Context**
+    ``create_form``: An instance of :form: `spec_a_console.ConsoleSystemForm`
+    ``console_system``: An instance of :model: `spec_a_console.ConsoleSystem`
+
+    **Template:**
+    :template: `spec_a_console/create_system.html`
+    """
 
     # Import here to avoid circular import
     from .forms import ConsoleSystemForm
@@ -143,7 +180,17 @@ def create_console_system_view(request):
 
 @login_required
 def edit_console_system_view(request, slug):
-    """A view to edit an existing ConsoleSystem."""
+    """
+    A view to edit an existing ConsoleSystem.
+    Only the creator of the system can edit it.
+
+    **Context**
+    ``form``: An instance of :form: `spec_a_console.ConsoleSystemForm`
+    ``system``: An instance of :model: `spec_a_console.ConsoleSystem`
+
+    **Template:**
+    :template: `spec_a_console/edit_system.html`
+    """
     # Import here to avoid circular import:
     from .forms import ConsoleSystemForm
     system = get_object_or_404(ConsoleSystem, slug=slug)
@@ -174,6 +221,16 @@ def edit_console_system_view(request, slug):
 
 @login_required
 def delete_console_system_view(request, slug):
+    """
+    A view to delete an existing ConsoleSystem.
+    Only the creator of the system (or admin via admin panel) can delete it.
+
+    **Context**
+    ``system``: An instance of :model: `spec_a_console.ConsoleSystem`
+
+    **Template:**
+    :template: `spec_a_console/delete_system.html`
+    """
     system = get_object_or_404(ConsoleSystem, slug=slug)
     if request.user != system.created_by:
         messages.error(request,

@@ -55,8 +55,7 @@ class ConsoleSystem(models.Model):
 class SystemReview(models.Model):
     """
     A model to represent user reviews for a ConsoleSystem.
-    Related to :model:`auth.User` and
-    :model:`spec_a_console.ConsoleSystem`
+    Related to :model:`auth.User` and :model:`spec_a_console.ConsoleSystem`
     """
     system = models.ForeignKey(
         ConsoleSystem, on_delete=models.CASCADE, related_name='reviews'
@@ -74,6 +73,7 @@ class SystemReview(models.Model):
     class Meta:
         ordering = ['-created_on']
         # (Below) Optional: one review per user per system
+        # Currently using view logic to enforce this, not model constraint
         # unique_together = ('system', 'reviewer')
 
     def __str__(self):
