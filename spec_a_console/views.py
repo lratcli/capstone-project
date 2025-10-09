@@ -183,7 +183,7 @@ def edit_console_system_view(request, slug):
     """
     A view to edit an existing ConsoleSystem.
     Only the creator of the system can edit it.
-    
+
     **Context**
     ``form``: An instance of :form: `spec_a_console.ConsoleSystemForm`
     ``system``: An instance of :model: `spec_a_console.ConsoleSystem`
