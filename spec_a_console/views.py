@@ -54,8 +54,9 @@ def console_system_detailed_view(request, slug):
     reviews = system.reviews.filter().order_by('-created_on')
     review_count = system.reviews.filter(approved=True).count()
 
-    # calculate average rating
-    avg_rating = reviews.aggregate(Avg('rating'))['rating__avg'] or 0
+    # calculate average rating from approved reviews only
+    approved_reviews = reviews.filter(approved=True)
+    avg_rating = approved_reviews.aggregate(Avg('rating'))['rating__avg'] or 0
     avg_rating = round(avg_rating, 1)
 
     # Handle review submission
