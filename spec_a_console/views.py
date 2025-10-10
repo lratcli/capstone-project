@@ -205,7 +205,6 @@ def edit_console_system_view(request, slug):
             edited_system.save()
             messages.success(request, "System updated successfully.")
             return redirect('system_detail', slug=system.slug)
-        # TODO: check this else statement thoroughly
         else:
             messages.error(request, 'Please correct the errors below.')
     else:
