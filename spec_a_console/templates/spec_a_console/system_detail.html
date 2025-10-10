@@ -12,9 +12,9 @@
             <p>User reviews: {{ review_count}}. Average review score: {{ avg_rating }}</p>
             <div class="card mb-4 shadow-sm">
                 {% if "placeholder" in system.featured_image.url %}
-                <img src="{% static 'images/placeholder-image.webp' %}" class="scale" alt="placeholder image">
+                <img src="{% static 'images/placeholder-image.webp' %}" fetchpriority="high" class="scale" alt="placeholder image">
                 {% else %}
-                <img src="{{ system.featured_image.url }}" class="scale" alt="{{ system.name }}">
+                <img src="{{ system.featured_image.url }}" fetchpriority="high" class="scale" alt="{{ system.name }}">
                 {% endif %}
                 <div class="card-body">
                     {% if system.approval != 1%}
