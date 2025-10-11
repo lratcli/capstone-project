@@ -121,4 +121,25 @@ This screenshot shows the current state of the KanBan board at the time of final
 
 ![KanBan board at time of finishing up](readme-assets/kanban/kanban.webp)
 
+## Entity Relationship Diagram (ERD) ##
 
+The ERD for the database is as follows:
+
+![Database Entity Relationship Diagram](readme-assets/erd/erd.webp)
+
+
+## Wireframes ##
+
+Wireframes for the site design are below. They were initially sketched on paper then recreated using Balsamiq. Wireframes were created for the home page, the detailed page for each system, and for the "create a system" page containing the form used to create a system.
+
+**Home page:**
+
+![Home page wireframe](readme-assets/wireframes/capstone-home.webp)
+
+**Detailed page for each system**
+
+![alt text](readme-assets/wireframes/capstone-detailed.webp)
+
+**Create a System page:**
+
+![Create a System page wireframe](readme-assets/wireframes/capstone-create.webp)
