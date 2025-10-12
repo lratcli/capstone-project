@@ -136,7 +136,6 @@ def my_console_systems_view(request):
         request,
         'spec_a_console/my_systems.html',
         {
-            # 'user_systems': user_systems,
             'user_systems': page_obj.object_list,
             'page_obj': page_obj,
             'is_paginated': page_obj.has_other_pages(),
