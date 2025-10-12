@@ -7,7 +7,7 @@
 {% block content %}
 <div class="container my-4">
     <div class="row mb-4">
-        <div class="col-12 col-md-8 mx-auto">
+        <div class="col-md-10 mx-auto">
             <h1 class="mb-3">{{ system.name }}</h1>
             <p>User reviews: {{ review_count}}. Average review score: {{ avg_rating }}</p>
             <div class="card mb-4 shadow-sm">
@@ -55,7 +55,7 @@
 
     <!-- Creating New System reviews -->
     <div class="row">
-        <div class="col-12 col-md-8 mx-auto card mb-4 mt-4">
+        <div class="col-md-10 mx-auto card mb-4 mt-4">
             <div class="card-body">
                 {% if user.is_authenticated %}
                 {% if user_is_creator %}
@@ -83,7 +83,7 @@
 
     <!-- Displaying count of user reviews -->
     <div class="row">
-        <div class="col-12 text-center">
+        <div class="col-md-10 mx-auto text-center">
             <strong>
                 <i class="far fa-comments">Review count: </i> {{ review_count }}
             </strong>
@@ -94,7 +94,7 @@
     </div>
     <!-- Displaying Reviews -->
     <div class="row">
-        <div class="col-md-8 mx-auto card mb-4 mt-3 review-section-bg">
+        <div class="col-md-10 mx-auto card mb-4 mt-3 review-section-bg">
             <h3 class="mt-3 text-white">Reviews:</h3>
             <div class="card-body">
                 <!-- Loop to display any number of reviews -->
