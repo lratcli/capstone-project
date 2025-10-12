@@ -17,9 +17,6 @@ Including another URLconf
 from django.contrib import admin  # type: ignore
 from django.urls import path, include  # type: ignore
 
-# TODO: check why this code from the project guide materials doesn't work
-# from spec_a_console include urls as spec_a_console_urls
-
 
 urlpatterns = [
     path("accounts/", include("allauth.urls")),
