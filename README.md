@@ -6,7 +6,7 @@ A Django Capstone project
 
 [Link to project KanBan](https://github.com/users/lratcli/projects/12)
 
-Spec A Console is a fun website whose purpose is to allow people to create and share alternate-history games consoles. It's a chance to re-live plaground argunments about would could be, what should be, and what definitely shouldn't be.
+Spec A Console is a fun website whose purpose is to allow people to create and share alternate-history games consoles. It's a chance to re-live playground arguments about what could be, what should be, and what definitely shouldn't be.
 
 Create an account and create a system for others to view or leave a review of.
 
@@ -51,7 +51,7 @@ Example of desktop resolution scaling:
 - [Testing](#testing)
     - [Manual Testing against User Stories](#manual-testing-against-user-stories)
     - [Code Validation](#code-validation)
-    - [Lighthouse Testing](#lightouse-testing)
+    - [Lighthouse Testing](#lighthouse-testing)
 - [Bugs](#bugs)
 - [Use of AI](#use-of-ai)
 - [References and Credits](#references-and-credits)
@@ -71,7 +71,7 @@ The four Epics that User stories are split are:
 
 - Epic: Admin - core administration capability
 - Epic: User General - features common to all user activities
-- Epic: User Proposed-System - create and view hypothetical gaiming systems
+- Epic: User Proposed-System - create and view hypothetical gaming systems
 - Epic: User Review - attach user created reviews of a hypothetical gaming system to that system
 
 These Epics are represented by labels on respective user stories on the Kanban board.
@@ -133,13 +133,13 @@ The User Stories created to guide this project, and their respective Epics, are 
 <details>
   <summary>Click to expand section</summary>
 
-In keeping with the Agile Development approach, Stories were prioritised based on the value they added to the site. These catagories were:
+In keeping with the Agile Development approach, Stories were prioritised based on the value they added to the site. These categories were:
 - Must Have
 - Should Have
 - Could Have
 - Won't Have
 
-Initially there were no *Won't Have* User Stories as all were deemed to be of some degree of desireability, and at the start of developement it seemed that it might potentially be possible to implement all of them.
+Initially there were no *Won't Have* User Stories as all were deemed to be of some degree of desirability, and at the start of development it seemed that it might potentially be possible to implement all of them.
 
 Towards the end of the project, it was deemed that three user stories that had been **Could Have** were unrealistic in the time left and were changed to **Won't Have**. They were then moved back into the **"Backlog"** column on the KanBan board to indicate that they were not being implemented in this round of development, but that were still desireable for a future iteration.
 
@@ -254,7 +254,7 @@ As a visitor who is not logged in, navigation options are Home, Sign Up, and Log
 
 The footer contains contact and social media links, and a "Back to Top" link for easier navigation.
 
-![footer](footer.webp)
+![Footer](readme-assets/features/footer.webp)
 
 ## Main page ##
 
@@ -405,7 +405,7 @@ These keys are not part of the project as it is kept in it's GitHub repo. The CL
 
 To create the Heroku app:
 
-1) Make project or project branch availble on GitHub
+1) Make project or project branch available on GitHub
 2) In Heroku create a new Heroku Project:
     - Give it a unique name
     - Select a region (for the currently deployed site this is Europe)
@@ -449,7 +449,7 @@ Manual testing was performed by following each of the implemented user stories a
 
 | User story | Required result | Outcome |
 |----------|----------|----------|
-| Create user account | User can create user account with username, passowrd, optional email | SUCCESS |
+| Create user account | User can create user account with username, password, optional email | SUCCESS |
 | Responsive, mobile first design | Site displays and functions correctly across mobile to desktop screen sizes | SUCCESS |
 | Dedicated Proposed-System pages | Each user created System has its own page showing the full details of the System, which displays correctly | SUCCESS |
 | Home page content | The homepage shows a list of the most recently published fantasy Systems, sorted by publish date (newest first) | SUCCESS
@@ -496,7 +496,7 @@ All urls put into the validator came back green, with the exception of one that 
 
 ![Validation success](readme-assets/testing/validation-success.webp)
 
-The only excpetion was the signup page, where a user creates an account with the site. These errors appear to be caused by due to invalid HTML nesting from Django’s default form rendering, and the code in question is not part of a file I have worked on.
+The only exception was the signup page, where a user creates an account with the site. These errors appear to be caused by due to invalid HTML nesting from Django’s default form rendering, and the code in question is not part of a file I have worked on.
 
 ![Signup validation errors](readme-assets/testing/validation-errors.webp)
 
@@ -545,14 +545,14 @@ Example views.py:
 </details>
 <br>
 
-## Lightouse testing ##
+## Lighthouse testing ##
 
 <details>
   <summary>Click to expand section</summary>
 
 The site was tested at various points during development using Google Chrome Lighthouse.
 
-Performance can be variable, and this is due to a combination of Heroku, Bootstrap and Cloudinary imapacting performace. Performance results are generally in the 80's, but have been seen to come down to as low as the high 60s on occasion.
+Performance can be variable, and this is due to a combination of Heroku, Bootstrap and Cloudinary impacting performance. Performance results are generally in the 80's, but have been seen to come down to as low as the high 60s on occasion.
 
 ![Lighthouse results](readme-assets/testing/lighthouse.webp)
 
@@ -566,17 +566,17 @@ Performance can be variable, and this is due to a combination of Heroku, Bootstr
 
 The known Bugs and Issues with the site are as follows:
 
-1) Cloudinary files uploaded by the user when they create a Gaming System are not automatically deleted from Cloundinary storage, when which will accellerate the rate at which Cloundinary storage reaches its capacity. A means of automating the deletion of Cloudinary files is desireable.
+1) Cloudinary files uploaded by the user when they create a Gaming System are not automatically deleted from Cloudinary storage, when which will accelerate the rate at which Cloudinary storage reaches its capacity. A means of automating the deletion of Cloudinary files is desireable.
 
 2) When editing a Gaming System's details, the name of the existing featured_image that was originally uploaded to cloudinary is not shown. While the user can still change the featured_image, it would be better to have the name of the existing file shown to the user.
 
 3) On the Signup Registration page there remain HTML validation errors caused by the way Django is generating code for this page "behind the scenes". While the page and the sign up form do operate correctly in terms of the function of the site, it would be preferable to eliminate any and all validation errors even if they come from the way Django is doing things.
 
-4) The Create System form has validation for its fields, including some messages that appear at the top of the page. However, there is an issue where, if a mandatory field is left blank, and the submit button is pressed while the input field is offscreen, a specific warning/informatoin message for that field does not display.
+4) The Create System form has validation for its fields, including some messages that appear at the top of the page. However, there is an issue where, if a mandatory field is left blank, and the submit button is pressed while the input field is offscreen, a specific warning/information message for that field does not display.
 
 This last point is particularly important and the priority for future development after this iteration.
 
-The page *will* scroll back to the relevant input field and make the input field the active element, and hovering a mouse over the input field will bring up the relevant information, but this is not an ideal situation. On a mobile device the chances of a field being offscreen are high and a clearer indicaton of incorrect data entry into a field needs to be developed.
+The page *will* scroll back to the relevant input field and make the input field the active element, and hovering a mouse over the input field will bring up the relevant information, but this is not an ideal situation. On a mobile device the chances of a field being offscreen are high and a clearer indication of incorrect data entry into a field needs to be developed.
 
 
 </details>
@@ -594,14 +594,14 @@ AI - and in particular GitHub Copilot has proven to be very useful throughout th
 - Assisting with debugging and interpreting error messages
 - Generating the first draft of the "Technologies Used" section of this readme from within the project
 
-AI has been inolved in some way in most if not all of the steps involved in making this project. It is undoubtedly already key part of modern software development.
+AI has been involved in some way in most if not all of the steps involved in making this project. It is undoubtedly already key part of modern software development.
 
 
 # References and Credits #
 
 This project is based on the "I Think Therefore I Blog" project that is part of Code Institutes full-stack web development course.
 
-AI generated code and content is used in this project, and this was trained on the work of many people who it will never be possible to properly acknowlege.
+AI generated code and content is used in this project, and this was trained on the work of many people who it will never be possible to properly acknowledge.
 
 While the Coolors.co website was not used to generate a colour scheme for this project, the site was used to help capture a nice screen capture of the colours chosen.
 
