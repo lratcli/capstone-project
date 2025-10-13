@@ -38,26 +38,24 @@ Example of desktop resolution scaling:
     - [Admin](#admin)
     - [Navbar](#navbar)
     - [Footer](#footer)
-    - [Main page](main-page)
+    - [Main page](#main-page)
     - [Create System page](#create-system-page)
     - [System Detailed page](#system-detailed-page)
     - [My Systems](#my-systems)
     - [Create Account](#create-account)
-    - [Log In](#sign-in)
+    - [Log In](#log-in)
     - [Log Out](#log-out)
     - [User Notifications](#user-notifications)
 - [Technologies Used](#technologies-used)
 - [Deployment](#deployment)
 - [Testing](#testing)
+    - [Manual Testing against User Stories](#manual-testing-against-user-stories)
 - [Bugs](#bugs)
 - [Use of AI](#use-of-ai)
 - [References and Credits](#references-and-credits)
 
 
 # User Experience and Design
-
-<details>
-  <summary>Click to expand section</summary>
 
 The site goal is to create a website where people can come and share their ideas on what might have made a good console or not, and others can give feedback on that in the form of a "review". It is important that users can 'own' their systems by posting them from a user account, and that they can modify and also delete any console idea that they have created.
 
@@ -76,7 +74,10 @@ The four Epics that User stories are split are:
 
 These Epics are represented by labels on respective user stories on the Kanban board.
 
-## User Stories
+### User Stories ###
+
+<details>
+  <summary>Click to expand section</summary>
 
 The User Stories created to guide this project, and their respective Epics, are as follows:
 
@@ -116,21 +117,37 @@ The User Stories created to guide this project, and their respective Epics, are 
 
 - *User review of others' proposed-systems*: As a user I want to be able to leave reviews or feedback on console ideas, so I can be part of a larger discussion in the community.
 
-- *Review scores*: As a site user, I want to see an average review score along with each proposed system on the home page, so I can decide which systems to look at first.
+- *Review scores*: As a site user, I want to see an average review score along with each proposed system so I can quickly see how my opinion compares to others'
 
 - *Reviewer edit own reviews*: As a user creating creating reviews for other users' systems, I want to be able to modify my reviews, so I can keep my reviews up to date with edits to the system I am reviewing or changes in how I feel about a system.
 
 - *Reviewer delete own reviews*: As a user who has created reviews for other users' systems, I want to be able to fully delete my review data from the database, so I can be sure that my review is no longer attached to a proposed system in any way.
 
-## MoSCoW Prioritisation ##
+</details>
+<br>
 
-In keeping with the Agile Development approach, Stories were prioritised based on the value they added to the site.
+### MoSCoW Prioritisation ###
+
+<details>
+  <summary>Click to expand section</summary>
+
+In keeping with the Agile Development approach, Stories were prioritised based on the value they added to the site. These catagories were:
+- Must Have
+- Should Have
+- Could Have
+- Won't Have
 
 Initially there were no *Won't Have* User Stories as all were deemed to be of some degree of desireability, and at the start of developement it seemed that it might potentially be possible to implement all of them.
 
 Towards the end of the project, it was deemed that three user stories that had been **Could Have** were unrealistic in the time left and were changed to **Won't Have**. They were then moved back into the **"Backlog"** column on the KanBan board to indicate that they were not being implemented in this round of development, but that were still desireable for a future iteration.
 
-## Project KanBan board ##
+</details>
+<br>
+
+### Project KanBan board ###
+
+<details>
+  <summary>Click to expand section</summary>
 
 The User Stories along with their Epic and MoSCoW catagorisation via labels can be seen on the project KanBan board.
 
@@ -140,7 +157,13 @@ This screenshot shows the current state of the KanBan board at the time of final
 
 ![KanBan board at time of finishing up](readme-assets/kanban/kanban.webp)
 
+</details>
+<br>
+
 ## Entity Relationship Diagram (ERD) ##
+
+<details>
+  <summary>Click to expand section</summary>
 
 The ERD for the database is as follows:
 
@@ -154,7 +177,13 @@ As this is a Django/PostreSQL project, the GamingSystem and Review models inheri
 
 The GamingSystem model is used to support full end-user CRUD funtionality.
 
+</details>
+<br>
+
 ## Wireframes ##
+
+<details>
+  <summary>Click to expand section</summary>
 
 Wireframes for the site design are below. They were initially sketched on paper then recreated using Balsamiq. Wireframes were created for the home page, the detailed page for each system, and for the "create a system" page containing the form used to create a system.
 
@@ -172,13 +201,25 @@ The home page has an almost identical layout to the "My Systems" page, which dif
 
 ![Create a System page wireframe](readme-assets/wireframes/capstone-create.webp)
 
+</details>
+<br>
+
 ## Colour ##
+
+<details>
+  <summary>Click to expand section</summary>
 
 In keeping with the theme of the site, the colour scheme chosen was influenced by the first level of a classic video game, Green Hill Zone from Sonic the Hedgehog on the Sega Megadrive.
 
 ![Colour palette](readme-assets/colour/colours.webp)
 
+</details>
+<br>
+
 ## Fonts ##
+
+<details>
+  <summary>Click to expand section</summary>
 
 The site uses a primary and a seconday font, sourced from Google Fonts. These are Orbitron and Quantico, as they were determined to be be a good fit for retro focused games-system based site, while still offering a high degree of legibility.
 
@@ -188,9 +229,6 @@ The site uses a primary and a seconday font, sourced from Google Fonts. These ar
 <br>
 
 # Features #
-
-<details>
-  <summary>Click to expand section</summary>
 
 ## Admin  ##
 
@@ -306,9 +344,6 @@ Confirmation notifications appear after:
 
 ![Signed In Notification](readme-assets/features/notification-singed-in.webp)
 
-</details>
-<br>
-
 # Technologies Used
 
 <details>
@@ -387,8 +422,133 @@ To create the Heroku app:
     - Select either automatic deploys or manual deploys and chose a branch
 6) When deploymment is over select "Open app" to view the site
 
+When the site is deployed users should be able to access the home page, and Super Users/Admins should be able to log onto the Django admin panel by appending /admin to the URL for the site.
+
 </details>
 <br>
 
 # Testing #
 
+Manual testing was performed by following each of the implemented user stories and verifying the expected outcomes through direct interaction with the deployed site. 
+
+## Manual Testing against User Stories ##
+
+<details>
+  <summary>Click to expand section</summary>
+
+### Epic: Admin ###
+
+| User story | Required result | Outcome |
+|----------|----------|----------|
+| Admin full control | Admin accounts can access Django admin panel at [URL]/admin/ | SUCCESS |
+| Admin Content Approval | User submitted content not visible to other users until approved by admin in admin panel | SUCCESS |
+
+### Epic: User General ###
+
+| User story | Required result | Outcome |
+|----------|----------|----------|
+| Create user account | User can create user account with username, passowrd, optional email | SUCCESS |
+| Responsive, mobile first design | Site displays and functions correctly across mobile to desktop screen sizes | SUCCESS |
+| Dedicated Proposed-System pages | Each user created System has its own page showing the full details of the System, which displays correctly | SUCCESS |
+| Home page content | The homepage shows a list of the most recently published fantasy Systems, sorted by publish date (newest first) | SUCCESS
+|
+
+### Epic: User Proposed System ###
+
+| User story | Required result | Outcome |
+|----------|----------|----------|
+| Create hypothetical gaming System | A logged in user can access a "Create System" page with form that submits data representing a Gaming System. Form data is submitted successfully | SUCCESS |
+| User-owner edit System | A logged in user who has created a System can select an edit option when viewing the System, which takes them to an edit form. Submitted the edit form updates that System on the database | SUCCESS |
+| Delete proposed System | A logged in user who has created a System can permanently delete that System from the site using a Delete button and a confirmation modal | SUCCESS |
+| Detailed description of proposed Gaming System | The create form and detailed description page allow for entry and display of very large amounts of text | SUCCESS |
+| Detail sections for proposed System | The create System form has specific section for CPU, graphics processor, memory, price and proposed year, which successfully submit data of the correct type into the database | SUCCESS |
+| Proposed-System image | A logged in user can upload a representative image of their system when creating it. This image is displayed alongside other System information when the System is shown | SUCCESS |
+
+### Epic: User Review ###
+
+| User story | Required result | Outcome |
+|----------|----------|----------|
+| User review of others' Proposed-Systems | A logged in user can opt to leave a review of another users System. This is visible to other users when viewing the System. Only one review can be left per user, and a user cannot review their own System | SUCCESS |
+| Review scores | A logged in user, when leaving a review, selects a score between 1 - 10. This is used to calculate an average score, which is displayed along with the System in its detailed view | SUCCESS |
+
+
+</details>
+<br>
+
+## Code Validation ##
+
+HTML, CSS and Python were all run through validation tools. 
+
+(No custom Javascript was used in this project, and so there is no testing section for Javascript)
+
+### HTML Validation ###
+
+<details>
+  <summary>Click to expand section</summary>
+
+The W3 Schools validator was used. [https://validator.w3.org/](https://validator.w3.org/)
+
+All pages that could be checked were, with the limitation that the the validator could not check as a logged in user.
+
+All urls put into the validator came back green, with the exception of one that I will detail later.
+
+![Validation success](readme-assets/testing/validation-success.webp)
+
+The only excpetion was the signup page, where a user creates an account with the site. These errors appear to be caused by due to invalid HTML nesting from Django’s default form rendering, and the code in question is not part of a file I have worked on.
+
+![Signup validation errors](readme-assets/testing/validation-errors.webp)
+
+Copilot's desription of this issue is:
+
+"These errors are caused by invalid HTML generated by Django’s default form rendering ({{ form.as_p }}).
+
+Specifically, Django sometimes wraps help text and errors in <span class="helptext">, but if the help text contains a `<ul><li>`, it results in invalid nesting (block elements inside inline elements), which is not allowed in HTML."
+
+As these are issues caused by Django and outside of the code written for this project, and the author is unsure of how to fix them at this time, they remain present. Testing shows the signup feature of the site to work correctly regardless of these html validation issues.
+
+</details>
+<br>
+
+### CSS Validation ###
+
+<details>
+  <summary>Click to expand section</summary>
+
+The W3 School validator for CSS was used. [https://jigsaw.w3.org/css-validator/](https://jigsaw.w3.org/css-validator/)
+
+Validation was successful.
+
+![Css Validation](readme-assets/testing/validation-css.webp)
+
+### Python Validation ###
+
+Python code was validated through the Code Institute Python Linter. [https://pep8ci.herokuapp.com/](https://pep8ci.herokuapp.com/)
+
+All python files passed the linter with no errors.
+
+Example models.py:
+
+![Models validation](readme-assets/testing/validation-python-models.webp)
+
+Example views.py:
+
+![Views validation](readme-assets/testing/validation-python-views.webp)
+
+</details>
+<br>
+
+## Lightouse testing ##
+
+<details>
+  <summary>Click to expand section</summary>
+
+The site was tested at various points during development using Google Chrome Lighthouse.
+
+Performance can be variable, and this is due to a combination of Heroku, Bootstrap and Cloudinary imapacting performace. Performance results are generally in the 80's, but have been seen to come down to as low as the high 60s on occasion.
+
+![Lighthouse results](readme-assets/testing/lighthouse.webp)
+
+</details>
+<br>
+
+# Bugs #
