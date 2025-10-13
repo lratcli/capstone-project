@@ -9,7 +9,6 @@
 <p>Create your system!</p>
 
 <form id="createForm" method="post" enctype="multipart/form-data">
-    {{ create_form.name.errors }}
     {{ create_form | crispy }}
     {% csrf_token %}
     <button id="submitButton" type="submit" class="btn btn-login btn-lg">Submit</button>
