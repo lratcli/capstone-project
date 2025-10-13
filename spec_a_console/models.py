@@ -18,6 +18,8 @@ class ConsoleSystem(models.Model):
     """
     A model to represent a hypothetical gaming console created by
         :model:`auth.User`.
+
+    Related to :model:`auth.User` and :model:`spec_a_console.SystemReview`
     """
 
     name = models.CharField(max_length=200, unique=True)
@@ -72,9 +74,6 @@ class SystemReview(models.Model):
 
     class Meta:
         ordering = ['-created_on']
-        # (Below) Optional: one review per user per system
-        # Currently using view logic to enforce this, not model constraint
-        # unique_together = ('system', 'reviewer')
 
     def __str__(self):
         return f"{self.reviewer.username} review of {self.system.name}"
