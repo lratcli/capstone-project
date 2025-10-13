@@ -50,6 +50,8 @@ Example of desktop resolution scaling:
 - [Deployment](#deployment)
 - [Testing](#testing)
     - [Manual Testing against User Stories](#manual-testing-against-user-stories)
+    - [Code Validation](#code-validation)
+    - [Lighthouse Testing](#lightouse-testing)
 - [Bugs](#bugs)
 - [Use of AI](#use-of-ai)
 - [References and Credits](#references-and-credits)
@@ -520,7 +522,13 @@ Validation was successful.
 
 ![Css Validation](readme-assets/testing/validation-css.webp)
 
+</details>
+<br>
+
 ### Python Validation ###
+
+<details>
+  <summary>Click to expand section</summary>
 
 Python code was validated through the Code Institute Python Linter. [https://pep8ci.herokuapp.com/](https://pep8ci.herokuapp.com/)
 
@@ -552,3 +560,49 @@ Performance can be variable, and this is due to a combination of Heroku, Bootstr
 <br>
 
 # Bugs #
+
+<details>
+  <summary>Click to expand section</summary>
+
+The known Bugs and Issues with the site are as follows:
+
+1) Cloudinary files uploaded by the user when they create a Gaming System are not automatically deleted from Cloundinary storage, when which will accellerate the rate at which Cloundinary storage reaches its capacity. A means of automating the deletion of Cloudinary files is desireable.
+
+2) When editing a Gaming System's details, the name of the existing featured_image that was originally uploaded to cloudinary is not shown. While the user can still change the featured_image, it would be better to have the name of the existing file shown to the user.
+
+3) On the Signup Registration page there remain HTML validation errors caused by the way Django is generating code for this page "behind the scenes". While the page and the sign up form do operate correctly in terms of the function of the site, it would be preferable to eliminate any and all validation errors even if they come from the way Django is doing things.
+
+4) The Create System form has validation for its fields, including some messages that appear at the top of the page. However, there is an issue where, if a mandatory field is left blank, and the submit button is pressed while the input field is offscreen, a specific warning/informatoin message for that field does not display.
+
+This last point is particularly important and the priority for future development after this iteration.
+
+The page *will* scroll back to the relevant input field and make the input field the active element, and hovering a mouse over the input field will bring up the relevant information, but this is not an ideal situation. On a mobile device the chances of a field being offscreen are high and a clearer indicaton of incorrect data entry into a field needs to be developed.
+
+
+</details>
+<br>
+
+
+# Use of AI #
+
+AI - and in particular GitHub Copilot has proven to be very useful throughout the development of this project. The stages and roles it has been involved with include:
+
+- Refining User Stories
+- Tracking down documentation and definitions (along with desktop copilot)
+- Generating site images including backgrounds and specific images for User Created Systems (this was primarily desktop copilot)
+- Quickly generating code, particulary involving Bootstrap
+- Assisting with debugging and interpreting error messages
+- Generating the first draft of the "Technologies Used" section of this readme from within the project
+
+AI has been inolved in some way in most if not all of the steps involved in making this project. It is undoubtedly already key part of modern software development.
+
+
+# References and Credits #
+
+This project is based on the "I Think Therefore I Blog" project that is part of Code Institutes full-stack web development course.
+
+AI generated code and content is used in this project, and this was trained on the work of many people who it will never be possible to properly acknowlege.
+
+While the Coolors.co website was not used to generate a colour scheme for this project, the site was used to help capture a nice screen capture of the colours chosen.
+
+I would also like to acknowledge the many people at CodeInstitute who's hard work and assistance has made this project possible.
