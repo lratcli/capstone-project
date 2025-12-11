@@ -6,8 +6,24 @@
 {% if user.is_authenticated and system.created_by == user%}
 
 <h2>Edit System: {{ system.name }}</h2>
-<form method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data" novalidate>
     {% csrf_token %}
+
+    {% if form.errors %}
+    <div class="alert alert-danger">
+        <ul>
+        {% for field in form %}
+            {% for error in field.errors %}
+                <li><strong>{{ field.label }}:</strong> {{ error }}</li>
+            {% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
     {{ form|crispy }}
     <button type="submit" class="btn btn-login">Save Changes</button>
 </form>
