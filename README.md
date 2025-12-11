@@ -572,12 +572,6 @@ The known Bugs and Issues with the site are as follows:
 
 3) On the Signup Registration page there remain HTML validation errors caused by the way Django is generating code for this page "behind the scenes". While the page and the sign up form do operate correctly in terms of the function of the site, it would be preferable to eliminate any and all validation errors even if they come from the way Django is doing things.
 
-4) The Create System form has validation for its fields, including some messages that appear at the top of the page. However, there is an issue where, if a mandatory field is left blank, and the submit button is pressed while the input field is offscreen, a specific warning/information message for that field does not display.
-
-This last point is particularly important and the priority for future development after this iteration.
-
-The page *will* scroll back to the relevant input field and make the input field the active element, and hovering a mouse over the input field will bring up the relevant information, but this is not an ideal situation. On a mobile device the chances of a field being offscreen are high and a clearer indication of incorrect data entry into a field needs to be developed.
-
 
 </details>
 <br>
