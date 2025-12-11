@@ -8,7 +8,7 @@ class ConsoleSystemForm(forms.ModelForm):
     A form for creating and editing ConsoleSystem instances.
     Includes validation for non-negative launch price.
     """
-    featured_image = forms.ImageField(required=False)
+    # featured_image = forms.ImageField(required=False)
     launch_rrp_unadjusted = forms.DecimalField(
         min_value=0,
         error_messages={'min_value': 'Price cannot be negative.'}
@@ -41,8 +41,11 @@ class ConsoleSystemForm(forms.ModelForm):
             'detailed_description': 'Technical Specifications',
         }
         help_texts = {
-            'launch_rrp_unadjusted': 'Enter the launch price in USD.',
-            'release_year': 'Select the release year of the console.',
+            'featured_image': 'Optional. Note: if editing existing system, '
+            'current image will be retained if no new image is uploaded.',
+            'launch_rrp_unadjusted': 'Enter launch price in USD. '
+            'Negative values not allowed.',
+            'release_year': 'Choose release year between 1970 and 2025.',
         }
         error_messages = {
             'name': {
