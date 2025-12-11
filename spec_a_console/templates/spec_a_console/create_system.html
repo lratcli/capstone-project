@@ -6,11 +6,11 @@
 
 {% if user.is_authenticated %}
 
-<p>Create your system!</p>
+<h2>Create your system!</h2>
 
 <form id="createForm" method="post" enctype="multipart/form-data" novalidate>
     {% csrf_token %}
-    
+
     {% if create_form.errors %}
     <div class="alert alert-danger">
         <ul>
