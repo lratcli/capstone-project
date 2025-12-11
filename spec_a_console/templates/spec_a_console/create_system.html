@@ -8,9 +8,25 @@
 
 <p>Create your system!</p>
 
-<form id="createForm" method="post" enctype="multipart/form-data">
-    {{ create_form | crispy }}
+<form id="createForm" method="post" enctype="multipart/form-data" novalidate>
     {% csrf_token %}
+    
+    {% if create_form.errors %}
+    <div class="alert alert-danger">
+        <ul>
+        {% for field in create_form %}
+            {% for error in field.errors %}
+                <li><strong>{{ field.label }}:</strong> {{ error }}</li>
+            {% endfor %}
+        {% endfor %}
+        {% for error in create_form.non_field_errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    {{ create_form | crispy }}
     <button id="submitButton" type="submit" class="btn btn-login btn-lg">Submit</button>
 </form>
 
