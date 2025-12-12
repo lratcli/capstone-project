@@ -4,6 +4,8 @@ A Django Capstone project
 
 [Link to deployed site](https://spec-a-console-448d20442e38.herokuapp.com/)
 
+[Link to project Github](https://github.com/lratcli/capstone-project)
+
 [Link to project KanBan](https://github.com/users/lratcli/projects/12)
 
 Spec A Console is a fun website whose purpose is to allow people to create and share alternate-history games consoles. It's a chance to re-live playground arguments about what could be, what should be, and what definitely shouldn't be.
@@ -234,9 +236,27 @@ The site uses a primary and a seconday font, sourced from Google Fonts. These ar
 
 ## Admin  ##
 
-The site allows for designated administrators to sign in, and from there administer the site using the Django admin panel. Approval of Gaming Systems and Reviews that have been submitted by users are done through the admin panel. 
+The admin panel logon page is reached by appending **/admin/** to the URL for the site.
+
+The site allows for designated administrators to sign in, and from there administer the site using the Django admin panel. Approval of Gaming Systems and Reviews that have been submitted by users (to allow all other users to see them) is done through the admin panel.
 
 ![Admin panel](readme-assets/features/admin.webp)
+
+To approve a system or review and make it visible to other users (and site visitors who aren't logged in), from the admin home page and under the heading of "Spec_A_Console" go to either "Console systems" or "System reviews" respectively:
+
+![Admin home area for Spec-a-console systems and reviews](readme-assets/features/admin-systems-or-reviews.webp)
+
+Then find and select the system or review to approve (in this case the "QS"):
+
+![Admin find specific system](readme-assets/features/admin-select-system.webp)
+
+Then, for Systems, change "Approval" from Submitted to Accepted using the selector, and save...
+
+![Admin approve system](readme-assets/features/admin-select-accepted.webp)
+
+... or for a review tick the approved box and save.
+
+![Admin approve review](readme-assets/features/admin-approve-review.webp)
 
 ## Navbar ##
 
@@ -268,17 +288,30 @@ The main page features brief outlines of the six most recently added and approve
 
 The Create System page allows a logged in user to create a system using a form. The form fields are:
 
-This form allows a user to upload an representative image with the submission, so it can be displayed along with the system details.
+- Console Name
+- Image (optional)
+- Manufacturer
+- Release Year
+- Cpu
+- Graphics
+- Memory
+- Launch rrp unadjusted
+- Technical Specifications
+- Brief Description
+
+This form allows a user to optionally upload a representative image with the submission, so it can be displayed along with the system details.
 
 
-![Create System page](readme-assets/features/create-system.webp)
+![Create System page](readme-assets/features/create-system-form.webp)
 
 
-Fields for release year and price are validated to ensure year of release is between 1972 and 2025, and that price is not negative.
+Fields for release year and price are validated to ensure year of release is between 1970 and 2025, and that price is not negative.
 
-![Release year validation](readme-assets/features/year-validation.webp)
+![Validation failure message](readme-assets/features/create-validation-message.webp)
 
-![Price validation](readme-assets/features/price-validation.webp)
+![Release year validation](readme-assets/features/create-validation-year.webp)
+
+![Price validation](readme-assets/features/create-validation-price.webp)
 
 ## System Detailed page ##
 
@@ -296,11 +329,15 @@ Below the System is a form which allows another logged-in user to review the sys
 
 ![Review section](readme-assets/features/reviews.webp)
 
-## Edit system ##
+## Edit System page ##
 
-The Edit System page is very similar to the Create System page.
+The Edit System page is very similar to the Create System page, with the ability to leave without saving any changes.
 
-![Edit System](readme-assets/features/edit-system.webp)
+The image displayed for the system also be changed by uploading another image. If the image is not changed, the previous image will remain displayed.
+
+Note: there is currently an issue where the name of the current image is not displayed in the "Currently" section under image. The feature does, however, work as intended.
+
+![Edit System](readme-assets/features/edit-system-form.webp)
 
 ## My Systems ##
 
@@ -344,7 +381,12 @@ Confirmation notifications appear after:
 - Deleting a system
 - Creating a review
 
-![Signed In Notification](readme-assets/features/notification-singed-in.webp)
+![Signed In Notification](readme-assets/features/notification-signed-in.webp)
+
+Additionally, Django validation errors for form submissions are displayed aboved the form after attempting a pressing Submit on the Create System page or Save Changes on the Edit System page.
+
+![Form Validation Notifications](readme-assets/features/notification-validation-issues.webp)
+
 
 # Technologies Used
 
@@ -368,6 +410,8 @@ Confirmation notifications appear after:
 **JavaScript** - Used by Bootstrap
 
 **Cloudinary** - For image hosting, processing, and delivery via CDN.
+
+**pillow 12.0** - Python Imaging Library used for image processing and handling image uploads in Django.
 
 **PostgreSQL** - The production database, managed via Django’s ORM.
 
@@ -424,7 +468,7 @@ To create the Heroku app:
     - Select either automatic deploys or manual deploys and chose a branch
 6) When deploymment is over select "Open app" to view the site
 
-When the site is deployed users should be able to access the home page, and Super Users/Admins should be able to log onto the Django admin panel by appending /admin to the URL for the site.
+When the site is deployed users should be able to access the home page, and Super Users/Admins should be able to log onto the Django admin panel by appending **/admin/** to the URL for the site.
 
 </details>
 <br>
@@ -568,15 +612,11 @@ The known Bugs and Issues with the site are as follows:
 
 1) Cloudinary files uploaded by the user when they create a Gaming System are not automatically deleted from Cloudinary storage, when which will accelerate the rate at which Cloudinary storage reaches its capacity. A means of automating the deletion of Cloudinary files is desireable.
 
-2) When editing a Gaming System's details, the name of the existing featured_image that was originally uploaded to cloudinary is not shown. While the user can still change the featured_image, it would be better to have the name of the existing file shown to the user.
+2) When editing a Gaming System's details, the name of the existing featured_image that was originally uploaded to cloudinary is not shown. This appears to be due to an issue with the way that Django, Cloudinary, and Crispyforms interact. While the user can still change or retain the featured_image, it would be better to have the name of the existing file shown to the user.
+
+![currently information bug](readme-assets/features/bug-edit-currrently.webp)
 
 3) On the Signup Registration page there remain HTML validation errors caused by the way Django is generating code for this page "behind the scenes". While the page and the sign up form do operate correctly in terms of the function of the site, it would be preferable to eliminate any and all validation errors even if they come from the way Django is doing things.
-
-4) The Create System form has validation for its fields, including some messages that appear at the top of the page. However, there is an issue where, if a mandatory field is left blank, and the submit button is pressed while the input field is offscreen, a specific warning/information message for that field does not display.
-
-This last point is particularly important and the priority for future development after this iteration.
-
-The page *will* scroll back to the relevant input field and make the input field the active element, and hovering a mouse over the input field will bring up the relevant information, but this is not an ideal situation. On a mobile device the chances of a field being offscreen are high and a clearer indication of incorrect data entry into a field needs to be developed.
 
 
 </details>
