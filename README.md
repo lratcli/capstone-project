@@ -4,6 +4,8 @@ A Django Capstone project
 
 [Link to deployed site](https://spec-a-console-448d20442e38.herokuapp.com/)
 
+[Link to project Github](https://github.com/lratcli/capstone-project)
+
 [Link to project KanBan](https://github.com/users/lratcli/projects/12)
 
 Spec A Console is a fun website whose purpose is to allow people to create and share alternate-history games consoles. It's a chance to re-live playground arguments about what could be, what should be, and what definitely shouldn't be.
@@ -239,6 +241,22 @@ The admin panel logon page is reached by appending **/admin/** to the URL for th
 The site allows for designated administrators to sign in, and from there administer the site using the Django admin panel. Approval of Gaming Systems and Reviews that have been submitted by users (to allow all other users to see them) is done through the admin panel.
 
 ![Admin panel](readme-assets/features/admin.webp)
+
+To approve a system or review and make it visible to other users (and site visitors who aren't logged in), from the admin home page and under the heading of "Spec_A_Console" go to either "Console systems" or "System reviews" respectively:
+
+![Admin home area for Spec-a-console systems and reviews](readme-assets/features/admin-systems-or-reviews.webp)
+
+Then find and select the system or review to approve (in this case the "QS"):
+
+![Admin find specific system](readme-assets/features/admin-select-system.webp)
+
+Then, for Systems, change "Approval" from Submitted to Accepted using the selector, and save...
+
+![Admin approve system](readme-assets/features/admin-select-accepted.webp)
+
+... or for a review tick the approved box and save.
+
+![Admin approve review](readme-assets/features/admin-approve-review.webp)
 
 ## Navbar ##
 
