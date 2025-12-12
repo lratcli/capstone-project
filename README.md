@@ -313,9 +313,13 @@ Below the System is a form which allows another logged-in user to review the sys
 
 ## Edit system ##
 
-The Edit System page is very similar to the Create System page.
+The Edit System page is very similar to the Create System page, with the ability to leave without saving any changes.
 
-![Edit System](readme-assets/features/edit-system.webp)
+The image displayed for the system also be changed by uploading another image. If the image is not changed, the previous image will remain displayed.
+
+Note: there is currently an issue where the name of the current image is not displayed in the "Currently" section under image. The feature does, however, work as intended.
+
+![Edit System](readme-assets/features/edit-system-form.webp)
 
 ## My Systems ##
 
