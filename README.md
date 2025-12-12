@@ -311,7 +311,7 @@ Below the System is a form which allows another logged-in user to review the sys
 
 ![Review section](readme-assets/features/reviews.webp)
 
-## Edit system ##
+## Edit System page ##
 
 The Edit System page is very similar to the Create System page, with the ability to leave without saving any changes.
 
@@ -363,7 +363,12 @@ Confirmation notifications appear after:
 - Deleting a system
 - Creating a review
 
-![Signed In Notification](readme-assets/features/notification-singed-in.webp)
+![Signed In Notification](readme-assets/features/notification-signed-in.webp)
+
+Additionally, Django validation errors for form submissions are displayed aboved the form after attempting a pressing Submit on the Create System page or Save Changes on the Edit System page.
+
+![Form Validation Notifications](readme-assets/features/notification-validation-issues.webp)
+
 
 # Technologies Used
 
@@ -589,7 +594,9 @@ The known Bugs and Issues with the site are as follows:
 
 1) Cloudinary files uploaded by the user when they create a Gaming System are not automatically deleted from Cloudinary storage, when which will accelerate the rate at which Cloudinary storage reaches its capacity. A means of automating the deletion of Cloudinary files is desireable.
 
-2) When editing a Gaming System's details, the name of the existing featured_image that was originally uploaded to cloudinary is not shown. While the user can still change the featured_image, it would be better to have the name of the existing file shown to the user.
+2) When editing a Gaming System's details, the name of the existing featured_image that was originally uploaded to cloudinary is not shown. This appears to be due to an issue with the way that Django, Cloudinary, and Crispyforms interact. While the user can still change or retain the featured_image, it would be better to have the name of the existing file shown to the user.
+
+![currently information bug](readme-assets/features/bug-edit-currrently.webp)
 
 3) On the Signup Registration page there remain HTML validation errors caused by the way Django is generating code for this page "behind the scenes". While the page and the sign up form do operate correctly in terms of the function of the site, it would be preferable to eliminate any and all validation errors even if they come from the way Django is doing things.
 
