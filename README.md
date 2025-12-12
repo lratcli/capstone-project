@@ -270,17 +270,30 @@ The main page features brief outlines of the six most recently added and approve
 
 The Create System page allows a logged in user to create a system using a form. The form fields are:
 
-This form allows a user to upload an representative image with the submission, so it can be displayed along with the system details.
+- Console Name
+- Image (optional)
+- Manufacturer
+- Release Year
+- Cpu
+- Graphics
+- Memory
+- Launch rrp unadjusted
+- Technical Specifications
+- Brief Description
+
+This form allows a user to optionally upload a representative image with the submission, so it can be displayed along with the system details.
 
 
-![Create System page](readme-assets/features/create-system.webp)
+![Create System page](readme-assets/features/create-system-form.webp)
 
 
-Fields for release year and price are validated to ensure year of release is between 1972 and 2025, and that price is not negative.
+Fields for release year and price are validated to ensure year of release is between 1970 and 2025, and that price is not negative.
 
-![Release year validation](readme-assets/features/year-validation.webp)
+![Validation failure message](readme-assets/features/create-validation-message.webp)
 
-![Price validation](readme-assets/features/price-validation.webp)
+![Release year validation](readme-assets/features/create-validation-year.webp)
+
+![Price validation](readme-assets/features/create-validation-price.webp)
 
 ## System Detailed page ##
 
