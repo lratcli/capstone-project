@@ -4,13 +4,13 @@ A Django Capstone project
 
 [Link to deployed site](https://spec-a-console-448d20442e38.herokuapp.com/)
 
-[Link to project Github](https://github.com/lratcli/capstone-project)
-
 [Link to project KanBan](https://github.com/users/lratcli/projects/12)
+
+[Link to project Github](https://github.com/lratcli/capstone-project)
 
 Spec A Console is a fun website whose purpose is to allow people to create and share alternate-history games consoles. It's a chance to re-live playground arguments about what could be, what should be, and what definitely shouldn't be.
 
-Create an account and create a system for others to view or leave a review of.
+Create an account and create a System for others to view or leave a review of.
 
 Mobile example screenshot (actual mobile):
 
@@ -61,7 +61,7 @@ Example of desktop resolution scaling:
 
 # User Experience and Design
 
-The site goal is to create a website where people can come and share their ideas on what might have made a good console or not, and others can give feedback on that in the form of a "review". It is important that users can 'own' their systems by posting them from a user account, and that they can modify and also delete any console idea that they have created.
+The site goal is to create a website where people can come and share their ideas on what might have made a good console or not, and others can give feedback on that in the form of a "review". It is important that users can 'own' their Systems by posting them from a user account, and that they can modify and also delete any console idea that they have created.
 
 As a layer of protection against misuse, all reveiws must be approved by an administrator after creation or modification before anyone other than the user-creator can see them on the site. Reviews must also be approved before anyone other than the user-creator can see them.
 
@@ -143,7 +143,7 @@ In keeping with the Agile Development approach, Stories were prioritised based o
 
 Initially there were no *Won't Have* User Stories as all were deemed to be of some degree of desirability, and at the start of development it seemed that it might potentially be possible to implement all of them.
 
-Towards the end of the project, it was deemed that three user stories that had been **Could Have** were unrealistic in the time left and were changed to **Won't Have**. They were then moved back into the **"Backlog"** column on the KanBan board to indicate that they were not being implemented in this round of development, but that were still desireable for a future iteration.
+Towards the end of the project, it was deemed that three user stories that had been **Could Have** were unrealistic in the time left and were changed to **Won't Have**. They were then moved back into the **"Backlog"** column on the KanBan board to indicate that they were not being implemented in this round of development, but that were still desirable for a future iteration.
 
 </details>
 <br>
@@ -153,7 +153,7 @@ Towards the end of the project, it was deemed that three user stories that had b
 <details>
   <summary>Click to expand section</summary>
 
-The User Stories along with their Epic and MoSCoW catagorisation via labels can be seen on the project KanBan board.
+The User Stories along with their Epic and MoSCoW categorisation via labels can be seen on the project KanBan board.
 
 [Link to project KanBan](https://github.com/users/lratcli/projects/12)
 
@@ -179,7 +179,7 @@ The relationship between User and GamingSystem is one to many, as is User to Rev
 
 As this is a Django/PostreSQL project, the GamingSystem and Review models inherit from the Django Model.
 
-The GamingSystem model is used to support full end-user CRUD funtionality.
+The GamingSystem model is used to support full end-user CRUD functionality.
 
 </details>
 <br>
@@ -189,17 +189,17 @@ The GamingSystem model is used to support full end-user CRUD funtionality.
 <details>
   <summary>Click to expand section</summary>
 
-Wireframes for the site design are below. They were initially sketched on paper then recreated using Balsamiq. Wireframes were created for the home page, the detailed page for each system, and for the "create a system" page containing the form used to create a system.
+Wireframes for the site design are below. They were initially sketched on paper then recreated using Balsamiq. Wireframes were created for the home page, the detailed page for each System, and for the "Create a System" page containing the form used to create a System.
 
 **Home page & My Systems:**
 
-The home page has an almost identical layout to the "My Systems" page, which differs only in some of the text above the listed systems.
+The home page has an almost identical layout to the "My Systems" page, which differs only in some of the text above the listed Systems.
 
 ![Home page wireframe](readme-assets/wireframes/capstone-home.webp)
 
-**Detailed page for each system:**
+**Detailed page for each System:**
 
-![Detailed system page](readme-assets/wireframes/capstone-detailed.webp)
+![Detailed System page](readme-assets/wireframes/capstone-detailed.webp)
 
 **Create a System page:**
 
@@ -225,7 +225,7 @@ In keeping with the theme of the site, the colour scheme chosen was influenced b
 <details>
   <summary>Click to expand section</summary>
 
-The site uses a primary and a seconday font, sourced from Google Fonts. These are Orbitron and Quantico, as they were determined to be be a good fit for retro focused games-system based site, while still offering a high degree of legibility.
+The site uses a primary and a secondary font, sourced from Google Fonts. These are Orbitron and Quantico, as they were determined to be be a good fit for retro focused games-system based site, while still offering a high degree of legibility.
 
 ![Google Fonts used](readme-assets/fonts/fonts.webp)
 
@@ -242,17 +242,17 @@ The site allows for designated administrators to sign in, and from there adminis
 
 ![Admin panel](readme-assets/features/admin.webp)
 
-To approve a system or review and make it visible to other users (and site visitors who aren't logged in), from the admin home page and under the heading of "Spec_A_Console" go to either "Console systems" or "System reviews" respectively:
+To approve a System or review and make it visible to other users (and site visitors who aren't logged in), from the admin home page and under the heading of "Spec_A_Console" go to either "Console systems" or "System reviews" respectively:
 
-![Admin home area for Spec-a-console systems and reviews](readme-assets/features/admin-systems-or-reviews.webp)
+![Admin home area for Spec-a-console Systems and Reviews](readme-assets/features/admin-systems-or-reviews.webp)
 
-Then find and select the system or review to approve (in this case the "QS"):
+Then find and select the System or Review to approve (in this case the "QS"):
 
-![Admin find specific system](readme-assets/features/admin-select-system.webp)
+![Admin find specific System](readme-assets/features/admin-select-system.webp)
 
 Then, for Systems, change "Approval" from Submitted to Accepted using the selector, and save...
 
-![Admin approve system](readme-assets/features/admin-select-accepted.webp)
+![Admin approve System](readme-assets/features/admin-select-accepted.webp)
 
 ... or for a review tick the approved box and save.
 
@@ -278,7 +278,7 @@ The footer contains contact and social media links, and a "Back to Top" link for
 
 ## Main page ##
 
-The main page features brief outlines of the six most recently added and approved gaming systems created by users. When more than six systems are on the site, pagination controls are displayed allowing the user to navigate back through more systems.
+The main page features brief outlines of the six most recently added and approved gaming Systems created by users. When more than six Systems are on the site, pagination controls are displayed allowing the user to navigate back through more Systems.
 
 ![Main page](readme-assets/features/main-page.webp)
 
@@ -286,7 +286,7 @@ The main page features brief outlines of the six most recently added and approve
 
 ## Create System page ##
 
-The Create System page allows a logged in user to create a system using a form. The form fields are:
+The "Create System" page allows a logged in user to create a System using a form. The form fields are:
 
 - Console Name
 - Image (optional)
@@ -299,7 +299,7 @@ The Create System page allows a logged in user to create a system using a form. 
 - Technical Specifications
 - Brief Description
 
-This form allows a user to optionally upload a representative image with the submission, so it can be displayed along with the system details.
+This form allows a user to optionally upload a representative image with the submission, so it can be displayed along with the System details.
 
 
 ![Create System page](readme-assets/features/create-system-form.webp)
@@ -315,17 +315,17 @@ Fields for release year and price are validated to ensure year of release is bet
 
 ## System Detailed page ##
 
-The System: Detailed page in a full page focusing on only one of the user submitted systems. It present in full all details that the creator entered on the Create System page. It also shows an average score of reviews from other users.
+The System: Detailed page in a full page focusing on only one of the user submitted Systems. It present in full all details that the creator entered on the Create System page. It also shows an average score of reviews from other users.
 
 If the person viewing is also the creator, they have the option to modify or delete their System.
 
 ![System Detailed](readme-assets/features/system-detailed.webp)
 
-If the user choses to delete their System, they are presented with a delete confirmation modal.
+If the user chooses to delete their System, they are presented with a delete confirmation modal.
 
 ![Delete confirmation modal](readme-assets/features/delete-confirmation-modal.webp)
 
-Below the System is a form which allows another logged-in user to review the system. Users can only post one review per system, and the creator cannot review their own creation.
+Below the System is a form which allows another logged-in user to review the System. Users can only post one review per System, and the creator cannot review their own creation.
 
 ![Review section](readme-assets/features/reviews.webp)
 
@@ -333,7 +333,7 @@ Below the System is a form which allows another logged-in user to review the sys
 
 The Edit System page is very similar to the Create System page, with the ability to leave without saving any changes.
 
-The image displayed for the system also be changed by uploading another image. If the image is not changed, the previous image will remain displayed.
+The image displayed for the System can also be changed by uploading another image. If the image is not changed, the previous image will remain displayed.
 
 Note: there is currently an issue where the name of the current image is not displayed in the "Currently" section under image. The feature does, however, work as intended.
 
@@ -341,9 +341,9 @@ Note: there is currently an issue where the name of the current image is not dis
 
 ## My Systems ##
 
-Very similar to the the main page, this shows all the systems that a logged in user has created, including ones that are not yet approved. They are displayed in the order of newest to oldest.
+Very similar to the main page, this shows all the Systems that a logged in user has created, including ones that are not yet approved. They are displayed in the order of newest to oldest.
 
-Like the main page, this displayed up to six systems, after which pagination controls appear to allow navigation to their older systems.
+Like the main page, this displays up to six Systems, after which pagination controls appear to allow navigation to their older Systems.
 
 ![My Systems](readme-assets/features/my-systems.webp)
 
@@ -376,14 +376,14 @@ The site also features confirmation notifications for key actions, including tho
 Confirmation notifications appear after:
 - Sign In
 - Sign Out
-- Creating a system
-- Editing a system
-- Deleting a system
+- Creating a System
+- Editing a System
+- Deleting a System
 - Creating a review
 
 ![Signed In Notification](readme-assets/features/notification-signed-in.webp)
 
-Additionally, Django validation errors for form submissions are displayed aboved the form after attempting a pressing Submit on the Create System page or Save Changes on the Edit System page.
+Additionally, Django validation errors for form submissions are displayed above the form after attempting a pressing Submit on the Create System page or Save Changes on the Edit System page.
 
 ![Form Validation Notifications](readme-assets/features/notification-validation-issues.webp)
 
@@ -544,7 +544,7 @@ The only exception was the signup page, where a user creates an account with the
 
 ![Signup validation errors](readme-assets/testing/validation-errors.webp)
 
-Copilot's desription of this issue is:
+Copilot's description of this issue is:
 
 "These errors are caused by invalid HTML generated by Django’s default form rendering ({{ form.as_p }}).
 
@@ -610,9 +610,9 @@ Performance can be variable, and this is due to a combination of Heroku, Bootstr
 
 The known Bugs and Issues with the site are as follows:
 
-1) Cloudinary files uploaded by the user when they create a Gaming System are not automatically deleted from Cloudinary storage, when which will accelerate the rate at which Cloudinary storage reaches its capacity. A means of automating the deletion of Cloudinary files is desireable.
+1) Cloudinary files uploaded by the user when they create a Gaming System are not automatically deleted from Cloudinary storage, which will accelerate the rate at which Cloudinary storage reaches its capacity. A means of automating the deletion of Cloudinary files is desirable.
 
-2) When editing a Gaming System's details, the name of the existing featured_image that was originally uploaded to cloudinary is not shown. This appears to be due to an issue with the way that Django, Cloudinary, and Crispyforms interact. While the user can still change or retain the featured_image, it would be better to have the name of the existing file shown to the user.
+2) When editing a Gaming System's details, the name of the existing featured image that was originally uploaded to cloudinary is not shown. This appears to be due to an issue with the way that Django, Cloudinary, and Crispyforms interact. While the user can still change or retain the featured_image, it would be better to have the name of the existing file shown to the user.
 
 ![currently information bug](readme-assets/features/bug-edit-currrently.webp)
 
@@ -630,7 +630,7 @@ AI - and in particular GitHub Copilot has proven to be very useful throughout th
 - Refining User Stories
 - Tracking down documentation and definitions (along with desktop copilot)
 - Generating site images including backgrounds and specific images for User Created Systems (this was primarily desktop copilot)
-- Quickly generating code, particulary involving Bootstrap
+- Quickly generating code, particularly involving Bootstrap
 - Assisting with debugging and interpreting error messages
 - Generating the first draft of the "Technologies Used" section of this readme from within the project
 
@@ -645,4 +645,4 @@ AI generated code and content is used in this project, and this was trained on t
 
 While the Coolors.co website was not used to generate a colour scheme for this project, the site was used to help capture a nice screen capture of the colours chosen.
 
-I would also like to acknowledge the many people at CodeInstitute who's hard work and assistance has made this project possible.
+I would also like to acknowledge the many people at CodeInstitute whose hard work and assistance has made this project possible.
