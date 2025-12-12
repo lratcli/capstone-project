@@ -315,7 +315,7 @@ Fields for release year and price are validated to ensure year of release is bet
 
 ## System Detailed page ##
 
-The System: Detailed page in a full page focusing on only one of the user submitted Systems. It present in full all details that the creator entered on the Create System page. It also shows an average score of reviews from other users.
+The System: Detailed page is a full page focusing on only one of the user submitted Systems. It presents in full all details that the creator entered on the Create System page. It also shows an average score of reviews from other users.
 
 If the person viewing is also the creator, they have the option to modify or delete their System.
 
@@ -335,7 +335,7 @@ The Edit System page is very similar to the Create System page, with the ability
 
 The image displayed for the System can also be changed by uploading another image. If the image is not changed, the previous image will remain displayed.
 
-Note: there is currently an issue where the name of the current image is not displayed in the "Currently" section under image. The feature does, however, work as intended.
+Note: there is currently an issue where the name of the current image is not displayed in the "Currently" section under image. The feature of changing or automatically retaining the image does, however, work correctly.
 
 ![Edit System](readme-assets/features/edit-system-form.webp)
 
