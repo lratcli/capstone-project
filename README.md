@@ -234,7 +234,9 @@ The site uses a primary and a seconday font, sourced from Google Fonts. These ar
 
 ## Admin  ##
 
-The site allows for designated administrators to sign in, and from there administer the site using the Django admin panel. Approval of Gaming Systems and Reviews that have been submitted by users are done through the admin panel. 
+The admin panel logon page is reached by appending **/admin/** to the URL for the site.
+
+The site allows for designated administrators to sign in, and from there administer the site using the Django admin panel. Approval of Gaming Systems and Reviews that have been submitted by users (to allow all other users to see them) is done through the admin panel.
 
 ![Admin panel](readme-assets/features/admin.webp)
 
@@ -369,6 +371,8 @@ Confirmation notifications appear after:
 
 **Cloudinary** - For image hosting, processing, and delivery via CDN.
 
+**pillow 12.0** - Python Imaging Library used for image processing and handling image uploads in Django.
+
 **PostgreSQL** - The production database, managed via Django’s ORM.
 
 **Heroku** - Used for deployment and hosting of the live site.
@@ -424,7 +428,7 @@ To create the Heroku app:
     - Select either automatic deploys or manual deploys and chose a branch
 6) When deploymment is over select "Open app" to view the site
 
-When the site is deployed users should be able to access the home page, and Super Users/Admins should be able to log onto the Django admin panel by appending /admin to the URL for the site.
+When the site is deployed users should be able to access the home page, and Super Users/Admins should be able to log onto the Django admin panel by appending **/admin/** to the URL for the site.
 
 </details>
 <br>
